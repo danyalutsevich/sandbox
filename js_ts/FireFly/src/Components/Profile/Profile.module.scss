@@ -1,0 +1,161 @@
+@import "../Header/Header.module.scss";
+.Profile {
+  display: flex;
+  flex-direction: row;
+  .LeftArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border: 1px solid white;
+    padding-left: 5vh;
+    padding-top: 10vh;
+    padding-bottom: 8vh;
+    padding-right: 5vh;
+    border-radius: 50px;
+    img {
+      background-color: white;
+      border-radius: 100%;
+      height: 300px;
+      width: 300px;
+      margin-bottom: auto;
+      border: 4px solid white;
+    }
+
+    label,
+    button {
+      font-family: $font-for-text;
+      font-size: 1.5rem;
+      color: white;
+      background-color: #4d4d4d;
+      border: 3px solid #606060;
+      margin: 15px;
+      padding: 12px 40px 12px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    }
+    label:hover,
+    button:hover {
+      background-color: #373737;
+      border: 3px solid #606060;
+    }
+  }
+
+  .RightArea {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    width: 59%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 10px;
+    border: 1px solid white;
+    padding-left: 5vh;
+    padding-top: 10vh;
+    padding-bottom: 8vh;
+    padding-right: 5vh;
+    border-radius: 50px;
+    font-family: $font-for-text;
+
+    .UserDescription {
+      h2 {
+        color: white;
+        font-size: 1.5rem;
+        margin: 10px;
+      }
+
+      input {
+        background-color: #4d4d4d;
+        border: 1px solid #606060;
+        border-radius: 10px;
+        font-family: $font-for-text;
+        color: white;
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        outline: 2px solid #909090;
+        width: 40vh;
+      }
+
+      button {
+        font-family: $font-for-text;
+        font-size: 1.5rem;
+        color: white;
+        background-color: #4d4d4d;
+        border: 3px solid #606060;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+      }
+      button:hover {
+        background-color: #373737;
+        border: 3px solid #606060;
+      }
+    }
+
+    .SignOutBtn {
+      font-family: $font-for-text;
+      font-size: 1.5rem;
+      color: white;
+      background-color: #4d4d4d;
+      border: 3px solid #606060;
+      margin: 20px 20px 20px 0px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+      width: 20vh;
+    }
+    .SignOutBtn:hover {
+      background-color: #373737;
+      border: 3px solid #606060;
+    }
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin: 10px;
+    .LeftArea {
+      width: 100%;
+      margin: 0px;
+      padding: 10px;
+      border-radius: 0px;
+      img {
+        height: 200px;
+        width: 200px;
+      }
+      label,
+      button {
+        font-size: 1.2rem;
+        margin: 10px;
+        padding: 10px 30px 10px 30px;
+      }
+    }
+    .RightArea {
+      width: 100%;
+      margin: 0px;
+      padding: 10px;
+      border-radius: 0px;
+      .UserDescription {
+        h2 {
+          font-size: 1.2rem;
+        }
+        input {
+          font-size: 1.2rem;
+          padding: 10px 20px;
+          width: 30vh;
+        }
+        button {
+          font-size: 1.2rem;
+          margin: 10px;
+        }
+      }
+      .SignOutBtn {
+        font-size: 1.2rem;
+        margin: 10px;
+      }
+    }
+  }
+}

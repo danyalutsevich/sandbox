@@ -1,0 +1,15 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../../dist/out-tsc",
+		 "module": "Node16",
+	  "moduleResolution": "Node16"
+	},
+	"include": [
+		"**/*.spec.ts",
+		"**/*.spec.tsx",
+		"**/*.spec.js",
+		"**/*.spec.jsx",
+		"**/*.d.ts"
+	]
+}

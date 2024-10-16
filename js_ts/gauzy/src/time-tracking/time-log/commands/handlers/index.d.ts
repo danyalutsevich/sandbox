@@ -1,0 +1,11 @@
+import { TimeLogCreateHandler } from './time-log-create.handler';
+import { TimeLogUpdateHandler } from './time-log-update.handler';
+import { TimeLogDeleteHandler } from './time-log-delete.handler';
+import { DeleteTimeSpanHandler } from './delete-time-span.handler';
+import { GetConflictTimeLogHandler } from './get-conflict-time-log.handler';
+import { GetTimeLogGroupByDateHandler } from './get-time-log-group-by-date.handler';
+import { GetTimeLogGroupByEmployeeHandler } from './get-time-log-group-by-employee.handler';
+import { GetTimeLogGroupByProjectHandler } from './get-time-log-group-by-project.handler';
+import { GetTimeLogGroupByClientHandler } from './get-time-log-group-by-client.handler';
+import { ScheduleTimeLogEntriesHandler } from './schedule-time-log-entries.handler';
+export declare const CommandHandlers: (typeof TimeLogCreateHandler | typeof TimeLogUpdateHandler | typeof TimeLogDeleteHandler | typeof DeleteTimeSpanHandler | typeof GetConflictTimeLogHandler | typeof GetTimeLogGroupByDateHandler | typeof GetTimeLogGroupByEmployeeHandler | typeof GetTimeLogGroupByProjectHandler | typeof GetTimeLogGroupByClientHandler | typeof ScheduleTimeLogEntriesHandler)[];

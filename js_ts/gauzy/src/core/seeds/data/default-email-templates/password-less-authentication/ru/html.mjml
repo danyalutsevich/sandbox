@@ -1,0 +1,62 @@
+<mjml>
+  	<mj-body background-color="#fff">
+    	<mj-section>
+			<mj-column>
+				<mj-image
+					width="100px"
+					src="{{appLogo}}"
+				></mj-image>
+				<mj-divider
+					border-color="#1B005D"
+					border-width="1px"
+				></mj-divider>
+				<mj-text font-family="Helvetica">
+					<p>Hello {{email}},</p>
+					<p>Your login verification code: <strong>{{magicCode}}</strong></p>
+					<p>This login code allows you to securely access your account without a password. Simply click on the corresponding link below to log in without a password. Do not share the code with anyone.</p>
+				</mj-text>
+				<mj-button
+					href="{{magicLink}}"
+					font-family="Helvetica"
+					background-color="#3366ff"
+					color="white"
+					target="_blank"
+				>
+					Click Here
+				</mj-button>
+				<mj-text>
+    				This link and code will expire shortly. Please use them promptly. If the link doesn't work, you can use the login verification code directly.
+				</mj-text>
+				<mj-text
+					align="center"
+					font-family="Helvetica"
+				>
+					<p>
+						<span style="background-color: #32323205; text-align: center; font-weight: bold; padding: 15px;">
+							<strong>{{magicCode}}</strong>
+						</span>
+					</p>
+				</mj-text>
+				<mj-text font-family="Helvetica">
+					<p>Best regards,</p>
+					<p>{{appSignature}}</p>
+				</mj-text>
+				<mj-divider
+					border-color="#1B005D"
+					border-width="1px"
+				></mj-divider>
+				<mj-text
+					align="center"
+					font-size="12px"
+					font-family="helvetica"
+				>
+					© 2019,
+					<a href="{{appLink}}" style="color: #598bff">{{appName}}</a>
+					by
+					<a href="{{companyLink}}" style="color: #598bff">{{companyName}}</a>
+					All rights reserved.
+				</mj-text>
+			</mj-column>
+		</mj-section>
+  	</mj-body>
+</mjml>

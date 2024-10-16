@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "777303258538",
+    "firebase_url": "https://tennis-5b1a9-default-rtdb.firebaseio.com",
+    "project_id": "tennis-5b1a9",
+    "storage_bucket": "tennis-5b1a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777303258538:android:efff5c9e9b1083e3dfa7d3",
+        "android_client_info": {
+          "package_name": "com.centralParkTennis.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777303258538-q9utb3roulkhuuemlp24og9g03c2n0tf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.centralParkTennis.app",
+            "certificate_hash": "832d6cfed0683e3045d18638cdd27619246ec792"
+          }
+        },
+        {
+          "client_id": "777303258538-6fsnampvoektn8r0cinlqpjbr5kjjmjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM93x09KowQKfHHwVnNKWS326gZ_H5ZnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777303258538-6fsnampvoektn8r0cinlqpjbr5kjjmjm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "777303258538-6fjb8j0d7c4kbu119a17m44cpeasaglj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tennisApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

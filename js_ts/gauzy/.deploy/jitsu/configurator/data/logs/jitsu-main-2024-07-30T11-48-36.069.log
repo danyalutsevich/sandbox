@@ -1,0 +1,8 @@
+2024-07-30 11:47:37 [INFO]: *** Creating new AppConfig ***
+2024-07-30 11:47:38 [INFO]: Using server.log.path directory: "/home/configurator/data/logs"
+2024-07-30 11:47:38 [INFO]: Initializing redis configuration storage [redis://redis:6379]...
+2024-07-30 11:47:38 [INFO]: No SSO config provided, skipping initialize SSO Auth
+2024-07-30 11:47:38 [WARN]: 	⚠️ Please replace server.auth (CLUSTER_ADMIN_TOKEN env variable) with any random string or uuid before deploying anything to production. Otherwise security of the platform can be compromised
+2024-07-30 11:47:38 [INFO]: ⚙️  Started configurator: 0.0.0.0:7000
+2024-07-30 11:48:20 [INFO]: 🤖 * Configurator is shutting down.. *
+2024-07-30 11:48:35 [INFO]: *** Creating new AppConfig ***

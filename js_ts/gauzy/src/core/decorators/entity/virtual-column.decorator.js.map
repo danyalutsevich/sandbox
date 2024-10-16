@@ -1,0 +1,1 @@
+{"version":3,"file":"virtual-column.decorator.js","sourceRoot":"","sources":["virtual-column.decorator.ts"],"names":[],"mappings":";;;AAAA,0CAAyG;AAEzG;;;;;GAKG;AACH,SAAgB,qBAAqB,CACjC,UAAsC;IAClC,OAAO,EAAE,KAAK;CACjB;IAED,OAAO,CAAC,MAAW,EAAE,WAAmB,EAAE,EAAE;QACxC,IAAA,eAAc,EAAC,OAAO,CAAC,CAAC,MAAM,EAAE,WAAW,CAAC,CAAC;IACjD,CAAC,CAAC;AACN,CAAC;AARD,sDAQC"}

@@ -1,0 +1,70 @@
+2024-07-30 11:59:07 [INFO]:                                                                                                     
+         ╭────────────────────────────────────────────────────────────────────────────────╮         
+         │                                                                                │         
+         │                        Welcome to Jitsu Server v1.44.8!                        │         
+         │                                                                                │         
+         │              🚀 Jitsu is an open-source data collection platform               │         
+         │                                                                                │         
+         │     📚 Documentation:              │  https://jitsu.com/docs                   │         
+         │     ─────────────────              │  ──────────────────────                   │         
+         │     🌎 Website:                    │  https://jitsu.com                        │         
+         │     ───────────                    │  ─────────────────                        │         
+         │     🌟 Github:                     │  https://github.com/jitsucom/jitsu        │         
+         │     ──────────                     │  ─────────────────────────────────        │         
+         │     💪 Follow us on twitter:       │  https://twitter.com/jitsucom             │         
+         │     ────────────────────────       │  ────────────────────────────             │         
+         │     💬 Join our Slack:             │  https://jitsu.com/slack                  │         
+         │     ──────────────────             │  ───────────────────────                  │         
+         │                                                                                │         
+         ╰────────────────────────────────────────────────────────────────────────────────╯         
+                                                                                                    
+                                                                                                    
+2024-07-30 11:59:07 [INFO]: 📂 Using server.log.path directory: "/home/eventnative/data/logs"
+2024-07-30 11:59:07 [INFO]: 🚀 Starting Jitsu Server. Server name: jitsu
+2024-07-30 11:59:07 [INFO]: 💻 Server public url will be taken from Host header
+2024-07-30 11:59:07 [INFO]: 🔄 Resource [authorization] will be loaded every 1 seconds
+2024-07-30 11:59:08 [INFO]: ✅ New resource [authorization] has been loaded
+2024-07-30 11:59:09 [INFO]: 🔄 Resource [Jitsu-Server] will be loaded every 20 seconds
+2024-07-30 11:59:11 [INFO]: ✅ New resource [Jitsu-Server] has been loaded
+2024-07-30 11:59:11 [INFO]: 🏪 Initializing meta storage redis [redis://redis:6379]...
+2024-07-30 11:59:11 [INFO]: 🛫 Initializing redis coordination service [redis://redis:6379]...
+2024-07-30 11:59:11 [INFO]: Initializing Singer bridge. Batch size: 10000
+2024-07-30 11:59:11 [INFO]: Initializing Airbyte bridge. Batch size: 10000
+2024-07-30 11:59:11 [INFO]: [airbyte] Loading local airbyte docker images..
+2024-07-30 11:59:11 [INFO]: [airbyte] Checking mounted volume: jitsu_workspace ...
+2024-07-30 11:59:11 [31m[ERROR]: ❌ Airbyte integration is disabled: volume with name: jitsu_workspace hasn't been mounted to the current docker container. The volume is required for Airbyte integration. Please add -v jitsu_workspace:/home/eventnative/data/airbyte to your Jitsu container run[0m
+2024-07-30 11:59:11 [INFO]: 🔄 Resource [geo] will be loaded every 1 seconds
+2024-07-30 11:59:11 [INFO]: 📂 Create log.path directory: "/home/eventnative/data/logs/events"
+2024-07-30 11:59:12 [INFO]: ❌ Geo resolution isn't configured. You can add MaxMind license key on Jitsu Configurator UI.
+2024-07-30 11:59:12 [INFO]: ✅ New resource [geo] has been loaded
+2024-07-30 11:59:12 [INFO]: 🤖️ Initializing transform redis [redis://jitsu_redis_users_recognition:6380] with default key value ttl ms: 5184000000...
+2024-07-30 11:59:13 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:14 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:15 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:16 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:17 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:18 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:19 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:20 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:21 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:22 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:23 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:25 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:26 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:27 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:28 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:29 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:30 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:31 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:32 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:33 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:34 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:35 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:36 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:37 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:38 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:39 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:40 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:41 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:42 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:59:42 [31m[ERROR]: Error initializing transform key value storage: testing Redis connection during 30s: dial tcp 172.18.0.9:6380: connect: connection refused[0m

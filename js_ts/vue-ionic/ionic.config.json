@@ -1,0 +1,8 @@
+{
+  "name": "VueIonic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "a2cbf422"
+}

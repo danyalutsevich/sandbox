@@ -1,0 +1,1 @@
+{"version":3,"file":"invoice-item-bulk-input.dto.js","sourceRoot":"","sources":["invoice-item-bulk-input.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,yDAAyC;AACzC,qDAA0D;AAC1D,wBAAyC;AAEzC,MAAa,uBAAuB;IAKhC,IAAI,CAAyB;CAChC;AAND,0DAMC;AADG;IAHC,IAAA,yBAAO,GAAE;IACT,IAAA,gCAAc,EAAC,EAAE,IAAI,EAAE,IAAI,EAAE,CAAC;IAC9B,IAAA,wBAAI,EAAC,GAAG,EAAE,CAAC,uBAAoB,CAAC;;qDACJ"}

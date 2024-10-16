@@ -1,0 +1,1 @@
+{"version":3,"file":"github-entity-settings.js","sourceRoot":"","sources":["github-entity-settings.ts"],"names":[],"mappings":";;;AAAA,0DAA+D;AAElD,QAAA,uBAAuB,GAAG;IACnC;QACI,MAAM,EAAE,6BAAiB,CAAC,KAAK;QAC/B,IAAI,EAAE,IAAI;KACb;CACJ,CAAC;AAEW,QAAA,mBAAmB,GAAG;IAC/B;QACI,MAAM,EAAE,6BAAiB,CAAC,KAAK;QAC/B,IAAI,EAAE,IAAI;KACb;CACJ,CAAC"}

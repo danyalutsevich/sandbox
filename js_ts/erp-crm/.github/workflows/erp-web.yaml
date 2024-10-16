@@ -1,0 +1,25 @@
+name: erp-web
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v2
+        
+      - name: WEB ENV SAVE
+        run: echo "${{ vars.WEB_ENV_FILE }}" > .env
+
+      - name: Docker compose down
+        run: docker compose down
+
+      - name: Docker compose up
+        run: docker compose up -d --build web
+      
+      - name: Remove all <none> images and images that dont attached to any container
+        run: docker image prune -f

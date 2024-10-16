@@ -1,0 +1,21 @@
+{
+  "name": "@aetherspace/universal-app-router",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "features/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:web & npm run dev:mobile",
+    "dev:web": "npm -w @app/next run dev",
+    "dev:mobile": "npm -w @app/expo run dev",
+    "android": "npm -w @app/expo run android",
+    "ios": "npm -w @app/expo run ios",
+    "expo:web": "npm -w @app/expo run web",
+    "build": "npm -w @app/next run build",
+    "add-dependencies": "npm -w @app/expo run add-dependencies",
+    "env:local": "npm -w @app/next run env:local & npm -w @app/expo run env:local"
+  }
+}

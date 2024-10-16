@@ -1,0 +1,36 @@
+{
+	"name": "@gauzy/integration-hubstaff",
+	"version": "0.1.0",
+	"description": "Ever Gauzy Platform plugin for integration with HubStaff APIs",
+	"author": {
+		"name": "Ever Co. LTD",
+		"email": "ever@ever.co",
+		"url": "https://ever.co"
+	},
+	"license": "AGPL-3.0",
+	"private": true,
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"directories": {
+		"lib": "dist",
+		"test": "__test__"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"scripts": {
+		"test:e2e": "jest --config ./jest.config.js",
+		"build": "rimraf dist && yarn run compile",
+		"compile": "tsc -p tsconfig.lib.json"
+	},
+	"keywords": [],
+	"devDependencies": {
+		"@types/jest": "^29.5.12",
+		"@types/node": "^20.14.11",
+		"rimraf": "^3.0.2",
+		"typescript": "5.1.6"
+	}
+}

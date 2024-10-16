@@ -1,0 +1,62 @@
+.modal-z-index {
+  z-index: 110;
+}
+.modal-z-index-high {
+  z-index: 110;
+}
+
+.animate-disappear {
+  animation: disappear 0.3s ease-in-out;
+}
+
+.animate-appear {
+  animation: appear 0.3s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.3s ease-in-out;
+}
+
+.animate-slide-out {
+  animation: slide-out-right 0.3s ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out-right {
+  0% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}

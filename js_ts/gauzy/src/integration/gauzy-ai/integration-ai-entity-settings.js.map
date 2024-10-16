@@ -1,0 +1,1 @@
+{"version":3,"file":"integration-ai-entity-settings.js","sourceRoot":"","sources":["integration-ai-entity-settings.ts"],"names":[],"mappings":";;;AAAA,0DAA+D;AAElD,QAAA,uBAAuB,GAAG;IACnC;QACI,MAAM,EAAE,6BAAiB,CAAC,YAAY;QACtC,IAAI,EAAE,IAAI;KACb;IACD;QACI,MAAM,EAAE,6BAAiB,CAAC,oBAAoB;QAC9C,IAAI,EAAE,IAAI;KACb;CACJ,CAAC"}
