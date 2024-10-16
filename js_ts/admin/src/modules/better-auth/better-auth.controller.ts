@@ -17,9 +17,7 @@ export class BetterAuthController {
     if (!this.auth.betterAuth) {
       throw new Error('BetterAuth is not ready');
     }
-    //@ts-ignore
-    res.send('A');
-    return 'A';
+
     const { toNodeHandler } = await import('better-auth/node');
 
     try {
