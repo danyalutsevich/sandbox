@@ -17,6 +17,7 @@ async function bootstrap() {
     .setDescription('The admin API description')
     .addBearerAuth()
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document, {
     swaggerOptions: {
@@ -35,11 +36,6 @@ async function bootstrap() {
 
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
-  app.enableCors({
-    allowedHeaders: '*',
-    methods: '*',
-    origin: 'https://app.forestadmin.com/',
-  });
 
   // const agent = createAgent({
   //   authSecret: FOREST_AUTH_SECRET,
