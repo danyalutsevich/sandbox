@@ -32,6 +32,7 @@ async function bootstrap() {
   app.enableCors({
     origin: 'http://localhost:5173',
     methods: '*',
+    credentials: true,
   });
 
   app.use(json({ limit: '50mb' }));
