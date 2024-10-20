@@ -1,5 +1,6 @@
 import {
   Datagrid,
+  DeleteButton,
   Filter,
   List,
   Pagination,
@@ -31,6 +32,7 @@ export function BlogList(props: any) {
         <TextField source="title" />
         <TextField source="content" />
         <TextField source="author" />
+        <DeleteButton />
       </Datagrid>
     </List>
   );

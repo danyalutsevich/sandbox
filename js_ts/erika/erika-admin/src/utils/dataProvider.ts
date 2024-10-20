@@ -1,40 +1,37 @@
 import {
+  CreateParams,
+  CreateResult,
   DataProvider,
+  DeleteManyParams,
+  DeleteManyResult,
+  DeleteParams,
+  DeleteResult,
+  GetListParams,
   GetListResult,
+  GetManyParams,
+  GetManyReferenceParams,
+  GetManyReferenceResult,
+  GetManyResult,
+  GetOneParams,
   GetOneResult,
-  RaRecord,
+  QueryFunctionContext,
+  UpdateManyParams,
+  UpdateManyResult,
+  UpdateParams,
+  UpdateResult,
 } from "react-admin";
 import { SuperClient } from "../../../erika/eicrud_exports/super_client";
 
 export const sp = new SuperClient({ url: "http://localhost:3000" });
 
-const getOne = async <RecordType extends RaRecord = any>(
-  resource: string,
-  params: { id: string },
-): Promise<GetOneResult<RecordType>> => {
-  console.log("getOne called", { resource, params });
-
-  // Hardcoded data based on resource
-  const data: Record<string, any> = {
-    users: { id: "123", name: "John Doe", email: "johndoe@example.com" },
-    posts: {
-      id: "456",
-      title: "Post Title",
-      content: "Lorem ipsum dolor sit amet",
-    },
-  };
-
-  // Return the corresponding record for the resource
-  return {
-    data: data[resource] as RecordType,
-  };
-};
-
-export default (): DataProvider => ({
-  getList: async (resource, params): Promise<GetListResult> => {
+export default (sp: SuperClient): DataProvider => ({
+  getList: async (
+    resource: string,
+    params: GetListParams & QueryFunctionContext,
+  ): Promise<GetListResult> => {
     console.log("getList", { resource, params });
 
-    const res: any = await sp[resource].find(
+    const res = await sp[resource as keyof SuperClient].find(
       {
         ...params.filter,
       },
@@ -50,26 +47,124 @@ export default (): DataProvider => ({
       data: res.data as any,
       total: res.total,
     };
-
-    // return {
-    //   data: [{ name: "test" }],
-    //   total: 1,
-    // };
   },
 
-  getOne: async (resource, params) => {
-    const a: RaRecord = { id: 1, name: "test" };
-    console.log("getOne", { resource, params, a });
+  getOne: async (
+    resource: string,
+    params: GetOneParams & QueryFunctionContext,
+  ): Promise<GetOneResult> => {
+    const res = await sp[resource as keyof SuperClient].findOne({
+      id: params.id,
+    });
 
-    return { data: { id: 1, name: "test" } } as any;
-  },
-
-  getMany: async (resource, params) => {
-    console.log("getMany", { resource, params });
-
+    console.log("getOne", { resource, params, res });
     return {
-      data: [{ id: 1, name: "test" }] as any,
-      total: 1,
+      data: res,
+    };
+  },
+
+  getMany: async (
+    resource: string,
+    params: GetManyParams & QueryFunctionContext,
+  ): Promise<GetManyResult> => {
+    const res = await sp[resource as keyof SuperClient].find({
+      id: { $in: params.ids },
+    });
+
+    console.log("getMany", { resource, params, res });
+    return {
+      data: res.data,
+    };
+  },
+
+  getManyReference: async (
+    resource: string,
+    params: GetManyReferenceParams & QueryFunctionContext,
+  ): Promise<GetManyReferenceResult> => {
+    const res = await sp[resource as keyof SuperClient].find({
+      ...params.filter,
+    });
+
+    console.log("getManyReference", { resource, params, res });
+    return {
+      data: res.data,
+      total: res.total,
+    };
+  },
+
+  update: async (
+    resource: string,
+    params: UpdateParams & QueryFunctionContext,
+  ): Promise<UpdateResult> => {
+    const res = await sp[resource as keyof SuperClient].patch(
+      { id: params.id },
+      {
+        ...params.data,
+      },
+    );
+
+    console.log("update", { resource, params, res });
+    return {
+      data: res.data,
+    };
+  },
+
+  updateMany: async (
+    resource: string,
+    params: UpdateManyParams & QueryFunctionContext,
+  ): Promise<UpdateManyResult> => {
+    const res = await sp[resource as keyof SuperClient].patch(
+      { id: { $in: params.ids } },
+      {
+        ...params.data,
+      },
+    );
+
+    console.log("updateMany", { resource, params, res });
+    return {
+      data: res.data,
+    };
+  },
+
+  create: async (
+    resource: string,
+    params: CreateParams & QueryFunctionContext,
+  ): Promise<CreateResult> => {
+    const res = await sp[resource as keyof SuperClient].create({
+      ...params.data,
+    });
+
+    console.log("create", { resource, params, res });
+    return {
+      data: res.data,
+    };
+  },
+
+  delete: async (
+    resource: string,
+    params: DeleteParams & QueryFunctionContext,
+  ): Promise<DeleteResult> => {
+    const res = await sp[resource as keyof SuperClient].deleteOne({
+      id: params.id,
+    });
+
+    console.log("delete", { resource, params, res });
+    return {
+      data: res,
+    };
+  },
+
+  deleteMany: async (
+    resource: string,
+    params: DeleteManyParams & QueryFunctionContext,
+  ): Promise<DeleteManyResult> => {
+    const res = await sp[resource as keyof SuperClient].delete({
+      id: { $in: params.ids },
+    });
+
+    console.log("deleteMany", { resource, params, res });
+    return {
+      data: [res],
     };
   },
 
