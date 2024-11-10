@@ -1,0 +1,49 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PublicTeamQueryDTO = exports.PublicTeamRelationEnum = void 0;
+const swagger_1 = require("@nestjs/swagger");
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+const dto_1 = require("./../../../shared/dto");
+const dto_2 = require("./../../../organization-team/dto");
+const dto_3 = require("./../../../time-tracking/timer/dto");
+/**
+ * Get public employee request DTO validation
+ */
+var PublicTeamRelationEnum;
+(function (PublicTeamRelationEnum) {
+    PublicTeamRelationEnum["organization"] = "organization";
+    PublicTeamRelationEnum["members"] = "members";
+    PublicTeamRelationEnum["members.employee"] = "members.employee";
+    PublicTeamRelationEnum["members.employee.user"] = "members.employee.user";
+    PublicTeamRelationEnum["tasks"] = "tasks";
+    PublicTeamRelationEnum["tasks.members"] = "tasks.members";
+    PublicTeamRelationEnum["tasks.teams"] = "tasks.teams";
+    PublicTeamRelationEnum["tasks.tags"] = "tasks.tags";
+    PublicTeamRelationEnum["statuses"] = "statuses";
+    PublicTeamRelationEnum["priorities"] = "priorities";
+    PublicTeamRelationEnum["sizes"] = "sizes";
+    PublicTeamRelationEnum["labels"] = "labels";
+    PublicTeamRelationEnum["issueTypes"] = "issueTypes";
+})(PublicTeamRelationEnum || (exports.PublicTeamRelationEnum = PublicTeamRelationEnum = {}));
+class PublicTeamQueryDTO extends (0, swagger_1.IntersectionType)((0, swagger_1.PickType)(dto_2.OrganizationTeamStatisticDTO, ['withLastWorkedTask']), (0, swagger_1.PickType)(dto_1.DateRangeQueryDTO, ['startDate', 'endDate']), (0, swagger_1.PickType)((0, swagger_1.PartialType)(dto_3.TimerStatusQueryDTO), ['source'])) {
+    relations;
+}
+exports.PublicTeamQueryDTO = PublicTeamQueryDTO;
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ type: () => String, enum: PublicTeamRelationEnum }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsEnum)(PublicTeamRelationEnum, { each: true }),
+    (0, class_transformer_1.Transform)(({ value }) => (value ? value.map((element) => element.trim()) : {})),
+    __metadata("design:type", Array)
+], PublicTeamQueryDTO.prototype, "relations", void 0);
+//# sourceMappingURL=public-team-query.dto.js.map

@@ -1,0 +1,258 @@
+// Modified code from https://github.com/xmlking/ngx-starter-kit.
+// MIT License, see https://github.com/xmlking/ngx-starter-kit/blob/develop/LICENSE
+// Copyright (c) 2018 Sumanth Chinthagunta
+
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { JoinColumn, RelationId, JoinTable } from 'typeorm';
+import { EntityRepositoryType } from '@mikro-orm/core';
+import { Exclude } from 'class-transformer';
+import { IsEmail, IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
+import * as dist from '../../plugins/contracts/dist/index';
+import {
+	ImageAsset,
+	Invite,
+	Role,
+	SocialAccount,
+	Tag,
+	TenantBaseEntity,
+	UserOrganization
+} from '../core/entities/internal';
+import {
+	ColumnIndex,
+	MultiORMColumn,
+	MultiORMEntity,
+	MultiORMManyToMany,
+	MultiORMManyToOne,
+	MultiORMOneToMany,
+	VirtualMultiOrmColumn
+} from './../core/decorators/entity';
+import { MikroOrmUserRepository } from './repository/mikro-orm-user.repository';
+
+@MultiORMEntity('user', { mikroOrmRepository: () => MikroOrmUserRepository })
+export class User extends TenantBaseEntity implements dist.IUser {
+	[EntityRepositoryType]?: MikroOrmUserRepository;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsString()
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true })
+	thirdPartyId?: string;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsString()
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true })
+	firstName?: string;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsString()
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true })
+	lastName?: string;
+
+	@ApiPropertyOptional({ type: () => String, minLength: 3, maxLength: 100 })
+	@IsOptional()
+	@IsEmail()
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true })
+	email?: string;
+
+	@ApiPropertyOptional({ type: () => String, minLength: 4, maxLength: 12 })
+	@IsOptional()
+	@IsString()
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true })
+	phoneNumber?: string;
+
+	@ApiPropertyOptional({ type: () => String, minLength: 3, maxLength: 20 })
+	@IsOptional()
+	@IsString()
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true })
+	username?: string;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsString()
+	@MultiORMColumn({ nullable: true })
+	timeZone?: string;
+
+	@ApiPropertyOptional({ type: () => String, enum: dist.TimeFormatEnum })
+	@IsOptional()
+	@IsEnum(dist.TimeFormatEnum)
+	@MultiORMColumn({
+		type: 'simple-enum',
+		enum: dist.TimeFormatEnum,
+		default: dist.TimeFormatEnum.FORMAT_12_HOURS
+	})
+	timeFormat?: dist.TimeFormatEnum;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsString()
+	@Exclude({ toPlainOnly: true })
+	@MultiORMColumn({ nullable: true })
+	hash?: string;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsString()
+	@Exclude({ toPlainOnly: true })
+	@MultiORMColumn({ insert: false, nullable: true })
+	refreshToken?: string;
+
+	@ApiPropertyOptional({ type: () => String, maxLength: 500 })
+	@IsOptional()
+	@IsString()
+	@MultiORMColumn({ length: 500, nullable: true })
+	imageUrl?: string;
+
+	@ApiPropertyOptional({ type: () => String, enum: dist.LanguagesEnum })
+	@IsOptional()
+	@IsEnum(dist.LanguagesEnum)
+	@MultiORMColumn({ nullable: true, default: dist.LanguagesEnum.ENGLISH })
+	preferredLanguage?: string;
+
+	@ApiPropertyOptional({ type: () => String, enum: dist.ComponentLayoutStyleEnum })
+	@IsOptional()
+	@IsEnum(dist.ComponentLayoutStyleEnum)
+	@MultiORMColumn({
+		type: 'simple-enum',
+		nullable: true,
+		default: dist.ComponentLayoutStyleEnum.TABLE,
+		enum: dist.ComponentLayoutStyleEnum
+	})
+	preferredComponentLayout?: dist.ComponentLayoutStyleEnum;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsString()
+	@Exclude({ toPlainOnly: true })
+	@MultiORMColumn({ insert: false, nullable: true })
+	code?: string;
+
+	@ApiPropertyOptional({ type: () => Date })
+	@IsOptional()
+	@Exclude({ toPlainOnly: true })
+	@MultiORMColumn({ insert: false, nullable: true })
+	codeExpireAt?: Date;
+
+	@ApiPropertyOptional({ type: () => Date })
+	@IsOptional()
+	@Exclude({ toPlainOnly: true })
+	@MultiORMColumn({ insert: false, nullable: true })
+	emailVerifiedAt?: Date;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@Exclude({ toPlainOnly: true })
+	@MultiORMColumn({ insert: false, nullable: true })
+	emailToken?: string;
+
+	/** Additional virtual columns */
+	@VirtualMultiOrmColumn()
+	name?: string;
+
+	@VirtualMultiOrmColumn()
+	isEmailVerified?: boolean;
+
+	/*
+	|--------------------------------------------------------------------------
+	| @ManyToOne
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Role
+	 */
+	@MultiORMManyToOne(() => Role, {
+		/** Indicates if relation column value can be nullable or not. */
+		nullable: true,
+
+		/** Database cascade action on delete. */
+		onDelete: 'SET NULL'
+	})
+	@JoinColumn()
+	role?: dist.IRole;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsUUID()
+	@RelationId((it: User) => it.role)
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true, relationId: true })
+	roleId?: string;
+
+	/**
+	 * ImageAsset
+	 */
+	@MultiORMManyToOne(() => ImageAsset, {
+		/** Indicates if relation column value can be nullable or not. */
+		nullable: true,
+
+		/** Database cascade action on delete. */
+		onDelete: 'SET NULL',
+
+		/** Eager relations are always loaded automatically when relation's owner entity is loaded using find* methods. */
+		eager: true
+	})
+	@JoinColumn()
+	image?: dist.IImageAsset;
+
+	@ApiPropertyOptional({ type: () => String })
+	@IsOptional()
+	@IsUUID()
+	@RelationId((it: User) => it.image)
+	@ColumnIndex()
+	@MultiORMColumn({ nullable: true, relationId: true })
+	imageId?: dist.IImageAsset['id'];
+
+	/*
+	|--------------------------------------------------------------------------
+	| @ManyToMany
+	|--------------------------------------------------------------------------
+	*/
+	// Tags
+	@MultiORMManyToMany(() => Tag, (tag) => tag.users, {
+		onUpdate: 'CASCADE',
+		onDelete: 'CASCADE',
+		owner: true,
+		pivotTable: 'tag_user',
+		joinColumn: 'userId',
+		inverseJoinColumn: 'tagId'
+	})
+	@JoinTable({
+		name: 'tag_user'
+	})
+	tags?: dist.ITag[];
+
+	/*
+	|--------------------------------------------------------------------------
+	| @OneToMany
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * UserOrganization
+	 */
+	@MultiORMOneToMany(() => UserOrganization, (it) => it.user, {
+		cascade: true
+	})
+	@JoinColumn()
+	organizations?: dist.IUserOrganization[];
+
+	/**
+	 * User belongs to invites
+	 */
+	@MultiORMOneToMany(() => Invite, (it) => it.user)
+	invites?: dist.IInvite[];
+
+	/**
+	 * User social accounts
+	 */
+	@MultiORMOneToMany(() => SocialAccount, (it) => it.user)
+	socialAccounts?: dist.ISocialAccount[];
+}

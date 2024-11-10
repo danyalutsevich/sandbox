@@ -1,0 +1,93 @@
+{
+  "name": "app-next",
+  "private": false,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "start:ci": "cross-env CI=true PORT=4000 run-s build start",
+    "test": "npm run test:unit",
+    "test:unit": "jest --watch",
+    "test:unit:ci": "jest --ci --runInBand",
+    "test:unit:coverage": "npm run test:unit -- --coverage --watchAll=false --watch=false",
+    "test:unit:coverage:watch": "npm run test:unit:coverage -- --watchAll=true",
+    "test:types": "tsc --pretty --noEmit",
+    "test:lint": "eslint -c ./.eslintrc.json ./src --ext .ts,.tsx",
+    "test:lint:fix": "npm run test:lint -- --fix",
+    "test:deps": "depcruise --validate -- src",
+    "test:e2e": "npx cypress open",
+    "test:e2e:headless": "npx cypress run",
+    "test:e2e:ci": "cross-env CI=true CYPRESS_baseUrl=http://localhost:4000 start-server-and-test start:ci http://localhost:4000 test:e2e:headless",
+    "test:ci": "cross-env CI=true run-s test:lint test:types test:deps test:unit:ci test:e2e:ci",
+    "test:playground": "start-storybook -p 6006 -s ./public",
+    "test:playground:build": "build-storybook -s ./public --no-dll",
+    "build-storybook": "build-storybook -s ./public",
+    "new:component": "hygen component new",
+    "new:page": "hygen page new",
+    "new:type": "hygen type new",
+    "new:util": "hygen util new"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test:ci"
+    }
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "npm run test:lint",
+      "npm run test:lint:fix"
+    ]
+  },
+  "dependencies": {
+    "nanoid": "3.1.30",
+    "next": "11.1.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "styled-jsx": "4.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.16.0",
+    "@next/eslint-plugin-next": "11.1.3",
+    "@storybook/addon-actions": "6.4.9",
+    "@storybook/addon-docs": "6.4.9",
+    "@storybook/addon-essentials": "6.4.9",
+    "@storybook/addon-links": "6.4.9",
+    "@storybook/react": "6.4.9",
+    "@testing-library/cypress": "8.0.3",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "12.1.2",
+    "@types/jest": "27.0.3",
+    "@types/node": "14.18.0",
+    "@types/react": "17.0.37",
+    "@typescript-eslint/eslint-plugin": "4.33.0",
+    "@typescript-eslint/parser": "4.33.0",
+    "babel-jest": "27.4.2",
+    "babel-loader": "8.2.3",
+    "cross-env": "7.0.3",
+    "dependency-cruiser": "10.8.0",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-config-react-app": "6.0.0",
+    "eslint-plugin-cypress": "2.12.1",
+    "eslint-plugin-flowtype": "5.10.0",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.27.1",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "husky": "4.3.8",
+    "hygen": "6.1.0",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "27.4.3",
+    "jest-watch-typeahead": "0.6.5",
+    "lint-staged": "10.5.4",
+    "npm-run-all": "4.1.5",
+    "postcss-preset-env": "6.7.0",
+    "prettier": "2.5.1",
+    "sass": "1.44.0",
+    "sass-loader": "10.2.0",
+    "start-server-and-test": "1.14.0",
+    "typescript": "4.5.2"
+  }
+}

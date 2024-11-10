@@ -1,0 +1,130 @@
+@import "../Header/Header.module.scss";
+.TopFilm {
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  width: 80%;
+  height: 80%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  display: block;
+  color: white;
+  max-width: 2000px;
+
+  .MoviePoster {
+    width: 15%;
+    height: 90%;
+    float: right;
+    scale: 1;
+    -webkit-transition: 1s ease; /* Safari and Chrome */
+    -moz-transition: 1s ease; /* Firefox 4 */
+    -o-transition: 1s ease; /* Opera */
+    border: 2px solid white;
+    border-radius: 5%;
+    box-shadow: 0 0 10px #ffffff77;
+    cursor:pointer;
+  }
+
+  .MoviePoster:hover {
+    scale: 1.05;
+    -webkit-transition: 1s ease; /* Safari and Chrome */
+    -moz-transition: 1s ease; /* Firefox 4 */
+    -o-transition: 1s ease; /* Opera */
+  }
+  .MoviePoster:active {
+    transform: scale(0.9);
+    transition: 0.5s;
+    border-radius: 5%;
+  }
+
+  .MoviePoster img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+  }
+
+  .TopFilmInfo .Link {
+    text-decoration: none;
+    color: white;
+    margin-top: 0;
+    font-family: $font-for-text;
+    font-size: 2.5rem;
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+
+  .TopFilmInfo .Link:hover {
+    color: gray;
+    transition: 0.3s;
+  }
+
+  .TopFilmInfo .Link:visited {
+    color: white;
+  }
+
+  .TopFilmInfo .Link:hover:visited {
+    color: gray;
+    transition: 0.3s;
+  }
+
+  .TopFilmInfo p {
+    font-family: $font-for-text;
+    text-decoration: none;
+    vertical-align: top;
+    font-size: 1.5em;
+    color: white;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    button {
+      background-color: #292929;
+      color: white;
+      font-family: $font-for-text;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin: 4px 2px;
+      margin-left: 0px;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      transition-duration: 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #1e1e1e;
+      color: white;
+      font-size: 16px;
+      transition-duration: 0.2s;
+    }
+
+    button:active {
+      background-color: #272727;
+      color: white;
+      transition-duration: 0.2s;
+    }
+
+    button:focus {
+      outline: none;
+    }
+  }
+  @media (max-width: 768px) {
+    .MoviePoster {
+      width: 30%;
+      height: 50%;
+      float: right;
+    }
+    .TopFilmInfo .Link {
+      font-size: 1.5em;
+    }
+    .TopFilmInfo p {
+      font-size: 1em;
+    }
+  }
+}

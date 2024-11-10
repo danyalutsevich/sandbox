@@ -1,0 +1,1 @@
+{"version":3,"file":"bulk-body-load-transform.pipe.js","sourceRoot":"","sources":["bulk-body-load-transform.pipe.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAA6E;AAGtE,IAAM,yBAAyB,uCAA/B,MAAM,yBAAyB;IAElC,SAAS,CAAC,KAAa,EAAE,QAA0B;QAC/C,OAAO,EAAE,IAAI,EAAG,KAAK,EAAE,CAAA;IAC3B,CAAC;CAEJ,CAAA;oCANY,yBAAyB;IADrC,IAAA,mBAAU,GAAE;GACA,yBAAyB,CAMrC"}

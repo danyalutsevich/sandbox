@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2018",
+    "sourceMap": true,
+    "allowJs": false,
+    "skipLibCheck": false,
+    "composite": true,
+    "baseUrl": "./packages",
+    "paths": {
+      "@dataui/crud": ["crud/src"],
+      "@dataui/crud-typeorm": ["crud-typeorm/src"],
+      "@dataui/crud-request": ["crud-request/src"],
+      "@dataui/crud-util": ["crud-util/src"],
+      "@dataui/crud/*": ["crud/src/*"],
+      "@dataui/crud-typeorm/*": ["crud-typeorm/src/*"],
+      "@dataui/crud-request/*": ["crud-request/src/*"],
+      "@dataui/crud-util/*": ["crud-util/src/*"]
+    }
+  },
+  "references": [
+    { "path": "crud" },
+    { "path": "crud-typeorm" },
+    { "path": "crud-request" },
+    { "path": "crud-util" }
+  ]
+}

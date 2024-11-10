@@ -1,0 +1,50 @@
+2024-07-30 11:52:53 [INFO]: 📂 Using server.log.path directory: "/home/eventnative/data/logs"
+2024-07-30 11:52:53 [INFO]: 🚀 Starting Jitsu Server. Server name: jitsu
+2024-07-30 11:52:53 [INFO]: 💻 Server public url will be taken from Host header
+2024-07-30 11:52:53 [INFO]: 🔄 Resource [authorization] will be loaded every 1 seconds
+2024-07-30 11:52:53 [INFO]: ✅ New resource [authorization] has been loaded
+2024-07-30 11:52:53 [INFO]: 🔄 Resource [Jitsu-Server] will be loaded every 20 seconds
+2024-07-30 11:52:53 [INFO]: ✅ New resource [Jitsu-Server] has been loaded
+2024-07-30 11:52:53 [INFO]: 🏪 Initializing meta storage redis [redis://redis:6379]...
+2024-07-30 11:52:53 [INFO]: 🛫 Initializing redis coordination service [redis://redis:6379]...
+2024-07-30 11:52:53 [INFO]: Initializing Singer bridge. Batch size: 10000
+2024-07-30 11:52:53 [INFO]: Initializing Airbyte bridge. Batch size: 10000
+2024-07-30 11:52:53 [INFO]: [airbyte] Loading local airbyte docker images..
+2024-07-30 11:52:53 [INFO]: [airbyte] Checking mounted volume: jitsu_workspace ...
+2024-07-30 11:52:53 [31m[ERROR]: ❌ Airbyte integration is disabled: volume with name: jitsu_workspace hasn't been mounted to the current docker container. The volume is required for Airbyte integration. Please add -v jitsu_workspace:/home/eventnative/data/airbyte to your Jitsu container run[0m
+2024-07-30 11:52:53 [INFO]: 🔄 Resource [geo] will be loaded every 1 seconds
+2024-07-30 11:52:53 [INFO]: 📂 Create log.path directory: "/home/eventnative/data/logs/events"
+2024-07-30 11:52:53 [INFO]: ❌ Geo resolution isn't configured. You can add MaxMind license key on Jitsu Configurator UI.
+2024-07-30 11:52:53 [INFO]: ✅ New resource [geo] has been loaded
+2024-07-30 11:52:53 [INFO]: 🤖️ Initializing transform redis [redis://jitsu_redis_users_recognition:6380] with default key value ttl ms: 5184000000...
+2024-07-30 11:52:54 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:52:55 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:52:56 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:52:57 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:52:59 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:00 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:01 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:02 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:03 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:04 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:05 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:06 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:07 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:08 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:09 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:10 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:11 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:12 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:13 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:14 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:15 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:16 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:17 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:18 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:19 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:20 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:21 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:22 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:23 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:24 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:53:24 [31m[ERROR]: Error initializing transform key value storage: testing Redis connection during 30s: dial tcp 172.18.0.9:6380: connect: connection refused[0m

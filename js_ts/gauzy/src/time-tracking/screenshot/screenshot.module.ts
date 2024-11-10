@@ -1,0 +1,36 @@
+import { forwardRef, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CqrsModule } from '@nestjs/cqrs';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { GauzyAIModule } from "../../../plugins/plugins/integration-ai/dist/index"
+import { RolePermissionModule } from '../../role-permission/role-permission.module';
+import { Screenshot } from './screenshot.entity';
+import { ScreenshotController } from './screenshot.controller';
+import { ScreenshotService } from './screenshot.service';
+import { TimeSlotModule } from './../time-slot/time-slot.module';
+import { IntegrationTenantModule } from './../../integration-tenant/integration-tenant.module';
+import { CommandHandlers } from './commands/handlers';
+
+@Module({
+	controllers: [
+		ScreenshotController
+	],
+	imports: [
+		TypeOrmModule.forFeature([Screenshot]),
+		MikroOrmModule.forFeature([Screenshot]),
+		GauzyAIModule.forRoot(),
+		RolePermissionModule,
+		forwardRef(() => TimeSlotModule),
+		IntegrationTenantModule,
+		CqrsModule
+	],
+	providers: [
+		ScreenshotService,
+		...CommandHandlers
+	],
+	exports: [
+		TypeOrmModule,
+		ScreenshotService
+	]
+})
+export class ScreenshotModule { }

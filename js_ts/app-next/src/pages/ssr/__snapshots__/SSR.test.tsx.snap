@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SSR page matches snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="container"
+  >
+    <ul
+      class="list"
+    >
+      <li>
+        <a
+          class="link"
+          href="/"
+        >
+          Welcome
+        </a>
+      </li>
+      <li>
+        <a
+          class="link"
+          href="/ssr"
+        >
+          SSR
+        </a>
+      </li>
+      <li>
+        <a
+          class="link"
+          href="/ssg"
+        >
+          SSG
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    <div
+      class="container"
+    >
+      <header
+        class="header"
+      >
+        <h1>
+          Server Side Rendering
+        </h1>
+        <p>
+          Random number on page generation: 
+          <code>
+            42
+          </code>
+        </p>
+        <p>
+          Edit 
+          <code>
+            src/pages/ssr/index.page.tsx
+          </code>
+           and save to reload.
+        </p>
+        <a
+          class="link"
+          href="https://nextjs.org/docs/basic-features/pages#server-side-rendering"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Learn More About SSR
+        </a>
+      </header>
+    </div>
+  </main>
+</DocumentFragment>
+`;

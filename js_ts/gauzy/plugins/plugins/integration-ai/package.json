@@ -1,0 +1,53 @@
+{
+	"name": "@gauzy/integration-ai",
+	"version": "0.1.0",
+	"description": "Ever Gauzy Platform plugin for integration with Gauzy AI",
+	"author": {
+		"name": "Ever Co. LTD",
+		"email": "ever@ever.co",
+		"url": "https://ever.co"
+	},
+	"license": "AGPL-3.0",
+	"private": true,
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"directories": {
+		"lib": "dist",
+		"test": "__test__"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"scripts": {
+		"test:e2e": "jest --config ./jest.config.js",
+		"build": "rimraf dist && yarn run compile",
+		"compile": "tsc -p tsconfig.lib.json"
+	},
+	"keywords": [],
+	"dependencies": {
+		"@apollo/client": "^3.6.2",
+		"@apollo/server": "^4.10.4",
+		"@nestjs/axios": "^3.0.2",
+		"@nestjs/common": "^10.3.7",
+		"@nestjs/config": "^3.2.0",
+		"apollo-cache-inmemory": "^1.6.6",
+		"apollo-client": "^2.6.10",
+		"apollo-link": "^1.2.14",
+		"apollo-link-http": "^1.5.17",
+		"axios": "^1.6.8",
+		"chalk": "4.1.2",
+		"cross-fetch": "^4.0.0",
+		"form-data": "^3.0.0",
+		"graphql": "^16.9.0",
+		"rxjs": "^7.8.1"
+	},
+	"devDependencies": {
+		"@types/jest": "^29.5.12",
+		"@types/node": "^20.14.11",
+		"rimraf": "^3.0.2",
+		"typescript": "5.1.6"
+	}
+}

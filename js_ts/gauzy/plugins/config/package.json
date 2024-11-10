@@ -1,0 +1,57 @@
+{
+	"name": "@gauzy/config",
+	"version": "0.1.0",
+	"description": "Ever Gauzy Platform Config module",
+	"author": {
+		"name": "Ever Co. LTD",
+		"email": "ever@ever.co",
+		"url": "https://ever.co"
+	},
+	"license": "AGPL-3.0",
+	"private": true,
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"directories": {
+		"lib": "dist",
+		"test": "__test__"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"scripts": {
+		"build": "rimraf dist && yarn run compile",
+		"build:prod": "node replaceEnvFiles.js && yarn build",
+		"compile": "tsc -p tsconfig.build.json"
+	},
+	"keywords": [],
+	"dependencies": {
+		"@mikro-orm/better-sqlite": "^6.3.0",
+		"@mikro-orm/core": "^6.3.0",
+		"@mikro-orm/mysql": "^6.3.0",
+		"@mikro-orm/nestjs": "^6.0.2",
+		"@mikro-orm/postgresql": "^6.3.0",
+		"@mikro-orm/sqlite": "^6.3.0",
+		"@nestjs/common": "^10.3.10",
+		"@nestjs/config": "^3.2.0",
+		"@nestjs/typeorm": "^10.0.2",
+		"@types/jest": "^29.5.12",
+		"app-root-path": "^3.1.0",
+		"chalk": "^5.3.0",
+		"dotenv": "^16.0.3",
+		"mikro-orm-soft-delete": "^1.0.0-alpha.1",
+		"nest-knexjs": "^0.0.21",
+		"tslib": "^2.6.3",
+		"typeorm": "0.3.20"
+	},
+	"resolutions": {
+		"typeorm": "0.3.20"
+	  },
+	"devDependencies": {
+		"@types/node": "20.14.11",
+		"rimraf": "^3.0.2",
+		"typescript": "5.1.6"
+	}
+}

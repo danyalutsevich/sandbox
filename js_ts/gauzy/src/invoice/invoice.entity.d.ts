@@ -1,0 +1,36 @@
+import { IInvoice, DiscountTaxTypeEnum, IInvoiceEstimateHistory, IPayment, IInvoiceItem, IOrganizationContact, IOrganization, ITag } from '../../plugins/contracts/dist/index';
+import { TenantOrganizationBaseEntity } from '../core/entities/internal';
+export declare class Invoice extends TenantOrganizationBaseEntity implements IInvoice {
+    invoiceDate: Date;
+    invoiceNumber: number;
+    dueDate: Date;
+    currency: string;
+    discountValue: number;
+    paid: boolean;
+    tax: number;
+    tax2: number;
+    terms?: string;
+    totalValue?: number;
+    status?: string;
+    isEstimate?: boolean;
+    isAccepted?: boolean;
+    discountType: DiscountTaxTypeEnum;
+    taxType: DiscountTaxTypeEnum;
+    tax2Type: DiscountTaxTypeEnum;
+    invoiceType?: string;
+    sentTo?: string;
+    organizationContactId?: string;
+    internalNote?: string;
+    alreadyPaid?: number;
+    amountDue?: number;
+    hasRemainingAmountInvoiced?: boolean;
+    token?: string;
+    fromOrganization?: IOrganization;
+    fromOrganizationId?: string;
+    toContact?: IOrganizationContact;
+    toContactId?: string;
+    invoiceItems?: IInvoiceItem[];
+    payments?: IPayment[];
+    historyRecords?: IInvoiceEstimateHistory[];
+    tags?: ITag[];
+}

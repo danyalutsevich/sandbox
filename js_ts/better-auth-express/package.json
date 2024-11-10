@@ -1,0 +1,20 @@
+{
+  "name": "better-auth-express",
+  "type": "commonjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/pg": "^8.11.10",
+    "better-auth": "^0.4.12-beta.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "pg": "^8.13.0"
+  }
+}

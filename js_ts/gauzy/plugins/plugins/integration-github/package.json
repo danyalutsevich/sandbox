@@ -1,0 +1,49 @@
+{
+	"name": "@gauzy/integration-github",
+	"version": "0.1.0",
+	"description": "Ever Gauzy Platform plugin for integration with Github APIs",
+	"author": {
+		"name": "Ever Co. LTD",
+		"email": "ever@ever.co",
+		"url": "https://ever.co"
+	},
+	"license": "AGPL-3.0",
+	"private": true,
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"directories": {
+		"lib": "dist",
+		"test": "__test__"
+	},
+	"publishConfig": {
+		"access": "restricted"
+	},
+	"scripts": {
+		"test:e2e": "jest --config ./jest.config.js",
+		"build": "rimraf dist && yarn run compile",
+		"compile": "tsc -p tsconfig.lib.json"
+	},
+	"keywords": [],
+	"dependencies": {
+		"@nestjs/common": "^10.3.7",
+		"@nestjs/core": "^10.3.7",
+		"@octokit/rest": "^20.0.2",
+		"@octokit/webhooks": "^9.2.4",
+		"chalk": "4.1.2",
+		"express": "^4.18.2",
+		"octokit": "^3.1.2",
+		"pino-std-serializers": "^6.2.2",
+		"probot": "^12.3.3",
+		"smee-client": "^1.2.3",
+		"underscore": "^1.13.3"
+	},
+	"devDependencies": {
+		"@types/jest": "^29.5.12",
+		"@types/node": "^20.14.11",
+		"rimraf": "^3.0.2",
+		"typescript": "5.1.6"
+	}
+}

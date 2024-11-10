@@ -1,0 +1,89 @@
+2024-07-30 11:57:13 [INFO]:                                                                                                     
+         ╭────────────────────────────────────────────────────────────────────────────────╮         
+         │                                                                                │         
+         │                        Welcome to Jitsu Server v1.44.8!                        │         
+         │                                                                                │         
+         │              🚀 Jitsu is an open-source data collection platform               │         
+         │                                                                                │         
+         │     📚 Documentation:              │  https://jitsu.com/docs                   │         
+         │     ─────────────────              │  ──────────────────────                   │         
+         │     🌎 Website:                    │  https://jitsu.com                        │         
+         │     ───────────                    │  ─────────────────                        │         
+         │     🌟 Github:                     │  https://github.com/jitsucom/jitsu        │         
+         │     ──────────                     │  ─────────────────────────────────        │         
+         │     💪 Follow us on twitter:       │  https://twitter.com/jitsucom             │         
+         │     ────────────────────────       │  ────────────────────────────             │         
+         │     💬 Join our Slack:             │  https://jitsu.com/slack                  │         
+         │     ──────────────────             │  ───────────────────────                  │         
+         │                                                                                │         
+         ╰────────────────────────────────────────────────────────────────────────────────╯         
+                                                                                                    
+                                                                                                    
+2024-07-30 11:57:13 [INFO]: 📂 Using server.log.path directory: "/home/eventnative/data/logs"
+2024-07-30 11:57:13 [INFO]: 🚀 Starting Jitsu Server. Server name: jitsu
+2024-07-30 11:57:13 [INFO]: 💻 Server public url will be taken from Host header
+2024-07-30 11:57:13 [INFO]: 🔄 Resource [authorization] will be loaded every 1 seconds
+2024-07-30 11:57:13 [INFO]: ✅ New resource [authorization] has been loaded
+2024-07-30 11:57:13 [INFO]: 🔄 Resource [Jitsu-Server] will be loaded every 20 seconds
+2024-07-30 11:57:14 [INFO]: ✅ New resource [Jitsu-Server] has been loaded
+2024-07-30 11:57:14 [INFO]: 🏪 Initializing meta storage redis [redis://redis:6379]...
+2024-07-30 11:57:14 [INFO]: 🛫 Initializing redis coordination service [redis://redis:6379]...
+2024-07-30 11:57:14 [INFO]: Initializing Singer bridge. Batch size: 10000
+2024-07-30 11:57:14 [INFO]: Initializing Airbyte bridge. Batch size: 10000
+2024-07-30 11:57:14 [INFO]: [airbyte] Loading local airbyte docker images..
+2024-07-30 11:57:14 [INFO]: [airbyte] Checking mounted volume: jitsu_workspace ...
+2024-07-30 11:57:14 [31m[ERROR]: ❌ Airbyte integration is disabled: volume with name: jitsu_workspace hasn't been mounted to the current docker container. The volume is required for Airbyte integration. Please add -v jitsu_workspace:/home/eventnative/data/airbyte to your Jitsu container run[0m
+2024-07-30 11:57:14 [INFO]: 🔄 Resource [geo] will be loaded every 1 seconds
+2024-07-30 11:57:14 [INFO]: 📂 Create log.path directory: "/home/eventnative/data/logs/events"
+2024-07-30 11:57:14 [INFO]: ❌ Geo resolution isn't configured. You can add MaxMind license key on Jitsu Configurator UI.
+2024-07-30 11:57:14 [INFO]: ✅ New resource [geo] has been loaded
+2024-07-30 11:57:14 [INFO]: 🤖️ Initializing transform redis [redis://jitsu_redis_users_recognition:6380] with default key value ttl ms: 5184000000...
+2024-07-30 11:57:15 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:16 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:17 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:18 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:20 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:21 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:22 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:23 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:24 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:25 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:26 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:27 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:28 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:30 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:31 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:32 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:33 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:34 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:35 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:36 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:37 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:38 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:39 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:41 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:42 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:43 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:44 [WARN]: failed to ping Redis: dial tcp 172.18.0.9:6380: connect: connection refused
+2024-07-30 11:57:44 [31m[ERROR]: Error initializing transform key value storage: testing Redis connection during 30s: dial tcp 172.18.0.9:6380: connect: connection refused[0m
+2024-07-30 11:58:14 [INFO]:                                                                                                     
+         ╭────────────────────────────────────────────────────────────────────────────────╮         
+         │                                                                                │         
+         │                        Welcome to Jitsu Server v1.44.8!                        │         
+         │                                                                                │         
+         │              🚀 Jitsu is an open-source data collection platform               │         
+         │                                                                                │         
+         │     📚 Documentation:              │  https://jitsu.com/docs                   │         
+         │     ─────────────────              │  ──────────────────────                   │         
+         │     🌎 Website:                    │  https://jitsu.com                        │         
+         │     ───────────                    │  ─────────────────                        │         
+         │     🌟 Github:                     │  https://github.com/jitsucom/jitsu        │         
+         │     ──────────                     │  ─────────────────────────────────        │         
+         │     💪 Follow us on twitter:       │  https://twitter.com/jitsucom             │         
+         │     ────────────────────────       │  ────────────────────────────             │         
+         │     💬 Join our Slack:             │  https://jitsu.com/slack                  │         
+         │     ──────────────────             │  ───────────────────────                  │         
+         │                                                                                │         
+         ╰────────────────────────────────────────────────────────────────────────────────╯         
+                                                                                                    
+                                                                                                    
