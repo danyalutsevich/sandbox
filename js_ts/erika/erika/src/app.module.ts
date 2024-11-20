@@ -17,6 +17,7 @@ import { Module } from '@nestjs/common';
       driver: PostgreSqlDriver,
       clientUrl: 'postgresql://postgres:root@localhost:5432/erika-db',
     }),
+
     EICRUDModule.forRoot(),
   ],
   providers: [

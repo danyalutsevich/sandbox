@@ -92,6 +92,13 @@ export function Blog() {
             onChange={(e) => setContent(e.target.value)}
           />
           <Button onClick={() => createPost.mutate()}>Create Post</Button>
+          <Button
+            onClick={() => {
+              sp.blog.say_hello({ hello: "a" });
+            }}
+          >
+            Say hello!
+          </Button>
         </CardContent>
         <CardFooter className="space-x-1">
           <Button onClick={checkBlogAuth}>Check Blog Auth</Button>

@@ -1,3 +1,4 @@
+import { SayHelloDto, SayHelloReturnDto } from './cmds/say_hello/say_hello.dto';
 import { ModuleRef } from "@nestjs/core";
 import { Blog } from "./blog.entity";
 import { Injectable } from "@nestjs/common";
@@ -14,5 +15,9 @@ export class BlogService extends CrudService<Blog> {
     }
     
     // GENERATED START - do not remove
+    async $say_hello(dto: SayHelloDto, ctx: CrudContext, inheritance?: Inheritance): Promise<SayHelloReturnDto> {
+       return serviceCmds.say_hello.action.call(this, dto, ctx, inheritance);
+    }
+
 
 }

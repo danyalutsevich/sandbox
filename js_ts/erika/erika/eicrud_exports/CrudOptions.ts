@@ -7,6 +7,8 @@ export class CrudOptions<T = any> implements ICrudOptions {
 
   cached?: boolean;
 
+  returnUpdatedEntities?: boolean;
+
   jwtCookie?: boolean;
 
   fields?: Extract<keyof T, string>[];
@@ -22,4 +24,6 @@ export class CrudOptions<T = any> implements ICrudOptions {
    * @warning Letting users set IDs can lead to security issues
    */
   allowIdOverride?: boolean;
+
+  skipServiceHooks?: boolean;
 }
