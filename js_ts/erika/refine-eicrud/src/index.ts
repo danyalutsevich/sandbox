@@ -1,5 +1,7 @@
-import { DataProvider } from "@refinedev/core";
-import { SuperClient } from "../../erika/eicrud_exports/super_client";
+import { BaseRecord, DataProvider } from "@refinedev/core";
+// import { SuperClient } from "../../erika/eicrud_exports/super_client";
+
+export type SuperClient = any;
 
 export const dataProvider = (sp: SuperClient): DataProvider => ({
   getOne: async ({ resource, id, meta }) => {
@@ -66,7 +68,6 @@ export const dataProvider = (sp: SuperClient): DataProvider => ({
       },
       { returnUpdatedEntities: true },
     );
-    console.log({ res });
 
     return {
       data: res.deleted as any,
@@ -92,6 +93,12 @@ export const dataProvider = (sp: SuperClient): DataProvider => ({
       data: res,
     };
   },
-  // deleteMany: ({ resource, ids, variables, meta }) => Promise
+  // deleteMany: async ({ resource, ids, variables, meta }) => {
+  //   const res = await sp[resource as keyof SuperClient].deleteIn(ids);
+  //
+  //   return {
+  //     data: ids.map((id: any) => ({ id })),
+  //   };
+  // },
   // updateMany: ({ resource, ids, variables, meta }) => Promise
 });

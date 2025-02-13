@@ -6,16 +6,17 @@
   "directories": {
     "test": "test"
   },
+  "dependencies": {
+    "@refinedev/core": "^4.56.0"
+  },
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "build": "tsc"
   },
   "keywords": [
     "refine",
     "eicrud"
   ],
   "author": "danyalutsevich",
-  "license": "ISC",
-  "dependencies": {
-    "@refinedev/core": "^4.56.0"
-  }
+  "license": "ISC"
 }

@@ -20,11 +20,14 @@ export function Blog() {
   const queryClient = useQueryClient();
   const createPost = useMutation({
     mutationFn: async () => {
-      return await sp.blog.create({
-        content,
-        title,
-        author: JSON.parse(localStorage.getItem("userId") || ""),
-      });
+      // return await sp.blog.create({
+      //   content,
+      //   title,
+      //   author: JSON.parse(localStorage.getItem("userId") || ""),
+      // });
+      //
+      //
+      // sp.blog.find()
     },
     onSuccess: () => {
       //@ts-ignore
@@ -38,8 +41,8 @@ export function Blog() {
     queryFn: async () => {
       const res = await sp.blog.find(
         {
-          // content: { $re: "[0-9]." },
-          id: "hi27kr",
+          content: { $re: "[0-9]." },
+          // id: "hi27kr",
           // title: "New Post",
         },
         {

@@ -27,6 +27,8 @@ export function Auth() {
       email: email,
       password: password,
     });
+
+    sp.user.login({ email: email, password: password });
     sp.user.setJwt(res.accessToken);
     localStorage.setItem("userId", JSON.stringify(res.userId));
     console.log(res);

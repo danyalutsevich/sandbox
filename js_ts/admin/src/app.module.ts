@@ -40,7 +40,7 @@ const transportString = `smtps://${emailConfig.EMAIL_USER}:${emailConfig.EMAIL_P
       username: 'postgres',
       password: 'root',
       synchronize: true,
-      logging: false,
+      logging: true,
       entities: Object.values(Entities),
     }),
     MailerModule.forRoot({
