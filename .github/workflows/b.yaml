@@ -1,0 +1,18 @@
+name: Workflow B
+on:
+  workflow_run:
+    workflows: ["Workflow A"]
+    types:
+      - completed
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: data-from-A
+
+      - name: Read Data
+        run: cat data.txt
