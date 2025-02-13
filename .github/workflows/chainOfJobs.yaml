@@ -1,0 +1,24 @@
+name: Chained Jobs
+
+on: push
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: echo "Job 1 running"
+
+  job2:
+    needs: job1 # Runs after job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 2
+        run: echo "Job 2 running"
+
+  job3:
+    needs: job2 # Runs after job2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 3
+        run: echo "Job 3 running"
