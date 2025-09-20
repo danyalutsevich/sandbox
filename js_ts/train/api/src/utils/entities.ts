@@ -1,0 +1,3 @@
+export * from '../modules/train/train.entity';
+export * from '../modules/user/user.entity';
+export * from '../modules/station/station.entity';
