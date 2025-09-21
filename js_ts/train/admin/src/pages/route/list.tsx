@@ -11,22 +11,31 @@ import {
   ListViewHeader,
 } from "@/components/refine-ui/views/list-view";
 
-import { Badge } from "@/components/ui/badge";
-import { Role } from "@/utils/enums/role";
-
-type User = {
+type Station = {
   id: number;
-  username: string;
-  email: string;
-  role: Role;
-  resetPasswordToken: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+  name: string;
 };
 
-export const UserList = () => {
+type Train = {
+  id: number;
+  name: string;
+};
+
+type Route = {
+  id: number;
+  name: string;
+  originStation: Station;
+  destinationStation: Station;
+  trains: Train[];
+  distance: number;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
+};
+
+export const RouteList = () => {
   const columns = React.useMemo(() => {
-    const columnHelper = createColumnHelper<User>();
+    const columnHelper = createColumnHelper<Route>();
 
     return [
       columnHelper.accessor("id", {
@@ -34,24 +43,34 @@ export const UserList = () => {
         header: "ID",
         enableSorting: true,
       }),
-      columnHelper.accessor("username", {
-        id: "username",
-        header: "Username",
+      columnHelper.accessor("name", {
+        id: "name",
+        header: "Name",
         enableSorting: true,
       }),
-      columnHelper.accessor("email", {
-        id: "email",
-        header: "Email",
-        enableSorting: true,
+      columnHelper.accessor("originStation", {
+        id: "originStation",
+        header: "Origin Station",
+        cell: ({ getValue }) => getValue()?.name ?? "-",
       }),
-      columnHelper.accessor("role", {
-        id: "role",
-        header: "Role",
-        enableSorting: true,
+      columnHelper.accessor("destinationStation", {
+        id: "destinationStation",
+        header: "Destination Station",
+        cell: ({ getValue }) => getValue()?.name ?? "-",
+      }),
+      columnHelper.accessor("trains", {
+        id: "trains",
+        header: "Trains",
         cell: ({ getValue }) => {
-          const role = getValue();
-          return <Badge variant="outline">{role}</Badge>;
+          const trains = getValue();
+          if (!trains || trains.length === 0) return "-";
+          return trains.map((t) => t.name).join(", ");
         },
+      }),
+      columnHelper.accessor("distance", {
+        id: "distance",
+        header: "Distance (km)",
+        enableSorting: true,
       }),
       columnHelper.accessor("createdAt", {
         id: "createdAt",
@@ -96,7 +115,7 @@ export const UserList = () => {
 
   return (
     <ListView>
-      <ListViewHeader title="Users" />
+      <ListViewHeader title="Routes" />
       <DataTable table={table} />
     </ListView>
   );

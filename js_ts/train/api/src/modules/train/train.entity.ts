@@ -4,11 +4,13 @@ import {
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { RouteEntity } from '../route/route.entity';
 import { StationEntity } from '../station/station.entity';
+import { ScheduleEntity } from '../schedule/schedule.entity';
 
 @Entity({ name: 'train' })
 export class TrainEntity {
@@ -39,8 +41,11 @@ export class TrainEntity {
   @ManyToOne(() => StationEntity)
   nextStation: StationEntity;
 
-  @ManyToOne(() => RouteEntity, route => route.trains)
+  @ManyToOne(() => RouteEntity, (route) => route.trains)
   route: RouteEntity;
+
+  @OneToMany(() => ScheduleEntity, (schedule) => schedule.train)
+  schedules: ScheduleEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

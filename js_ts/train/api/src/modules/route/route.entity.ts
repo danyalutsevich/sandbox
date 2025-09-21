@@ -1,7 +1,16 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { StationEntity } from "../station/station.entity";
-import { TrainEntity } from "../train/train.entity";
-
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { StationEntity } from '../station/station.entity';
+import { TrainEntity } from '../train/train.entity';
+import { ScheduleEntity } from '../schedule/schedule.entity';
 
 @Entity({ name: 'route' })
 export class RouteEntity {
@@ -11,17 +20,20 @@ export class RouteEntity {
   @Column()
   name: string;
 
+  @Column()
+  distance: number;
+
   @ManyToOne(() => StationEntity)
   originStation: StationEntity;
 
   @ManyToOne(() => StationEntity)
   destinationStation: StationEntity;
 
-  @OneToMany(() => TrainEntity, train => train.route)
+  @OneToMany(() => TrainEntity, (train) => train.route)
   trains: TrainEntity[];
 
-  @Column()
-  distance: number;
+  @OneToMany(() => ScheduleEntity, (schedule) => schedule.route)
+  schedules: ScheduleEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

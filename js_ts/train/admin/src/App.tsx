@@ -34,6 +34,8 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 import { TrainList } from "./pages/train/list";
 import { TrainCreate } from "./pages/train/create";
+import { UserList } from "./pages/user/list";
+import { RouteList } from "./pages/route/list";
 
 function App() {
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -79,6 +81,36 @@ function App() {
                   canDelete: true,
                 },
               },
+              {
+                name: "user",
+                list: "/user",
+                create: "/user/create",
+                edit: "/user/edit/:id",
+                show: "/user/show/:id",
+                meta: {
+                  canDelete: true,
+                },
+              },
+              {
+                name: "route",
+                list: "/route",
+                create: "/route/create",
+                edit: "/route/edit/:id",
+                show: "/route/show/:id",
+                meta: {
+                  canDelete: true,
+                },
+              },
+              {
+                name: "station",
+                list: "/station",
+                create: "/station/create",
+                edit: "/station/edit/:id",
+                show: "/station/show/:id",
+                meta: {
+                  canDelete: true,
+                },
+              },
             ]}
             options={{
               syncWithLocation: true,
@@ -117,6 +149,20 @@ function App() {
                 <Route path="/train">
                   <Route index element={<TrainList />} />
                   <Route path="create" element={<TrainCreate />} />
+                  {/* <Route path="edit/:id" element={<CategoryEdit />} /> */}
+                  {/* <Route path="show/:id" element={<CategoryShow />} /> */}
+                </Route>
+
+                <Route path="/user">
+                  <Route index element={<UserList />} />
+                  {/* <Route path="create" element={<TrainCreate />} /> */}
+                  {/* <Route path="edit/:id" element={<CategoryEdit />} /> */}
+                  {/* <Route path="show/:id" element={<CategoryShow />} /> */}
+                </Route>
+
+                <Route path="/route">
+                  <Route index element={<RouteList />} />
+                  {/* <Route path="create" element={<TrainCreate />} /> */}
                   {/* <Route path="edit/:id" element={<CategoryEdit />} /> */}
                   {/* <Route path="show/:id" element={<CategoryShow />} /> */}
                 </Route>
