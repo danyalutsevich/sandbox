@@ -10,6 +10,7 @@ import { StationService } from './station.service';
   },
   query: {
     softDelete: true,
+    join: {},
   },
   // routes: {
   //   exclude: ['getManyBase', 'getOneBase'],

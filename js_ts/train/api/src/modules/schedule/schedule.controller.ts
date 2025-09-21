@@ -10,6 +10,16 @@ import { ApiTags } from '@nestjs/swagger';
   },
   query: {
     softDelete: true,
+    join: {
+      route: {
+        alias: 'route',
+        eager: true,
+      },
+      train: {
+        alias: 'train',
+        eager: true,
+      },
+    },
   },
 })
 @ApiTags('schedule')

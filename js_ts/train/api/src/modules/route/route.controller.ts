@@ -10,10 +10,26 @@ import { ApiTags } from '@nestjs/swagger';
   },
   query: {
     softDelete: true,
+    join: {
+      originStation: {
+        alias: 'originStation',
+        eager: true,
+      },
+      destinationStation: {
+        alias: 'destinationStation',
+        eager: true,
+      },
+      trains: {
+        alias: 'trains',
+      },
+      schedules: {
+        alias: 'schedules',
+      },
+    },
   },
 })
 @ApiTags('Route')
 @Controller('route')
 export class RouteController implements CrudController<RouteEntity> {
-  constructor(public service: RouteService) {}
+  constructor(public service: RouteService) { }
 }

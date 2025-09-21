@@ -11,10 +11,18 @@ import { TrainService } from './train.service';
 
   query: {
     softDelete: true,
+    join: {
+      route: {
+        alias: 'route',
+      },
+      nextStation: {
+        alias: 'nextStation',
+      },
+      schedules: {
+        alias: 'schedules',
+      },
+    },
   },
-  // routes: {
-  //   exclude: ['getManyBase', 'getOneBase'],
-  // },
 })
 @ApiTags('Train')
 @Controller('train')
