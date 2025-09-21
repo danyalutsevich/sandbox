@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { RouteEntity } from '../route/route.entity';
+import { StationEntity } from '../station/station.entity';
 
 @Entity({ name: 'train' })
 export class TrainEntity {
@@ -32,6 +35,12 @@ export class TrainEntity {
 
   @Column({ default: 0 })
   avgSpeed: number;
+
+  @ManyToOne(() => StationEntity)
+  nextStation: StationEntity;
+
+  @ManyToOne(() => RouteEntity, route => route.trains)
+  route: RouteEntity;
 
   @CreateDateColumn()
   createdAt: Date;

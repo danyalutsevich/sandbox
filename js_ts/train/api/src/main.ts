@@ -3,12 +3,14 @@ import { AppModule } from './app.module';
 import { json, urlencoded } from 'express';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { DBQueryExceptionFilter } from './utils/filters/db.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const PORT = process.env.PORT ?? 3000;
 
   app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalFilters(new DBQueryExceptionFilter());
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
   app.enableCors();
