@@ -7,6 +7,7 @@ import { TrainModule } from './modules/train/train.module';
 import { ConfigModule } from '@nestjs/config';
 import { StationModule } from './modules/station/station.module';
 import { RouteModule } from './modules/route/route.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -21,9 +22,10 @@ import { RouteModule } from './modules/route/route.module';
     }),
     GlobalModule,
     AuthModule,
+    UserModule,
     TrainModule,
     StationModule,
-    RouteModule
+    RouteModule,
   ],
 })
 export class AppModule { }
