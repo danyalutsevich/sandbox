@@ -36,6 +36,29 @@ import { TrainList } from "./pages/train/list";
 import { TrainCreate } from "./pages/train/create";
 import { UserList } from "./pages/user/list";
 import { RouteList } from "./pages/route/list";
+import { TrainShow } from "./pages/train/show";
+import { TrainEdit } from "./pages/train/edit";
+import { RouteCreate } from "./pages/route/create";
+import { RouteShow } from "./pages/route/show";
+import { RouteEdit } from "./pages/route/edit";
+import { UserCreate } from "./pages/user/create";
+import { StationList } from "./pages/station/list";
+import { StationCreate } from "./pages/station/create";
+import { UserEdit } from "./pages/user/edit";
+import { UserShow } from "./pages/user/show";
+import { StationEdit } from "./pages/station/edit";
+import { StationShow } from "./pages/station/show";
+import { ScheduleList } from "./pages/schedule/list";
+import { ScheduleCreate } from "./pages/schedule/create";
+import { ScheduleEdit } from "./pages/schedule/edit";
+import { ScheduleShow } from "./pages/schedule/show";
+import {
+  CircleStopIcon,
+  ListIcon,
+  RouteIcon,
+  TrainIcon,
+  UserIcon,
+} from "lucide-react";
 
 function App() {
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -72,22 +95,24 @@ function App() {
               //   },
               // },
               {
-                name: "train",
-                list: "/train",
-                create: "/train/create",
-                edit: "/train/edit/:id",
-                show: "/train/show/:id",
-                meta: {
-                  canDelete: true,
-                },
-              },
-              {
                 name: "user",
                 list: "/user",
                 create: "/user/create",
                 edit: "/user/edit/:id",
                 show: "/user/show/:id",
                 meta: {
+                  icon: <UserIcon />,
+                  canDelete: true,
+                },
+              },
+              {
+                name: "train",
+                list: "/train",
+                create: "/train/create",
+                edit: "/train/edit/:id",
+                show: "/train/show/:id",
+                meta: {
+                  icon: <TrainIcon />,
                   canDelete: true,
                 },
               },
@@ -98,6 +123,7 @@ function App() {
                 edit: "/route/edit/:id",
                 show: "/route/show/:id",
                 meta: {
+                  icon: <RouteIcon />,
                   canDelete: true,
                 },
               },
@@ -108,6 +134,18 @@ function App() {
                 edit: "/station/edit/:id",
                 show: "/station/show/:id",
                 meta: {
+                  icon: <CircleStopIcon />,
+                  canDelete: true,
+                },
+              },
+              {
+                name: "schedule",
+                list: "/schedule",
+                create: "/schedule/create",
+                edit: "/schedule/edit/:id",
+                show: "/schedule/show/:id",
+                meta: {
+                  icon: <ListIcon />,
                   canDelete: true,
                 },
               },
@@ -146,26 +184,42 @@ function App() {
                 {/*   <Route path="edit/:id" element={<CategoryEdit />} /> */}
                 {/*   <Route path="show/:id" element={<CategoryShow />} /> */}
                 {/* </Route> */}
+
                 <Route path="/train">
                   <Route index element={<TrainList />} />
                   <Route path="create" element={<TrainCreate />} />
-                  {/* <Route path="edit/:id" element={<CategoryEdit />} /> */}
-                  {/* <Route path="show/:id" element={<CategoryShow />} /> */}
+                  <Route path="edit/:id" element={<TrainEdit />} />
+                  <Route path="show/:id" element={<TrainShow />} />
                 </Route>
 
                 <Route path="/user">
                   <Route index element={<UserList />} />
-                  {/* <Route path="create" element={<TrainCreate />} /> */}
-                  {/* <Route path="edit/:id" element={<CategoryEdit />} /> */}
-                  {/* <Route path="show/:id" element={<CategoryShow />} /> */}
+                  <Route path="create" element={<UserCreate />} />
+                  <Route path="edit/:id" element={<UserEdit />} />
+                  <Route path="show/:id" element={<UserShow />} />
+                </Route>
+
+                <Route path="/station">
+                  <Route index element={<StationList />} />
+                  <Route path="create" element={<StationCreate />} />
+                  <Route path="edit/:id" element={<StationEdit />} />
+                  <Route path="show/:id" element={<StationShow />} />
+                </Route>
+
+                <Route path="/schedule">
+                  <Route index element={<ScheduleList />} />
+                  <Route path="create" element={<ScheduleCreate />} />
+                  <Route path="edit/:id" element={<ScheduleEdit />} />
+                  <Route path="show/:id" element={<ScheduleShow />} />
                 </Route>
 
                 <Route path="/route">
                   <Route index element={<RouteList />} />
-                  {/* <Route path="create" element={<TrainCreate />} /> */}
-                  {/* <Route path="edit/:id" element={<CategoryEdit />} /> */}
-                  {/* <Route path="show/:id" element={<CategoryShow />} /> */}
+                  <Route path="create" element={<RouteCreate />} />
+                  <Route path="edit/:id" element={<RouteEdit />} />
+                  <Route path="show/:id" element={<RouteShow />} />
                 </Route>
+
                 <Route path="*" element={<ErrorComponent />} />
               </Route>
               <Route

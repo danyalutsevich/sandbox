@@ -2,7 +2,7 @@ import { useSelect } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useNavigate } from "react-router";
 
-import { CreateView } from "@/components/refine-ui/views/create-view";
+import { EditView } from "@/components/refine-ui/views/edit-view";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,27 +21,33 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const TrainCreate = () => {
+export const TrainEdit = () => {
   const navigate = useNavigate();
 
   const {
-    refineCore: { onFinish },
+    refineCore: { onFinish, query },
     ...form
   } = useForm({
     refineCoreProps: {},
   });
 
-  // relations: nextStation & route
-  const { options: stationOptions } = useSelect({
-    resource: "station",
+  const trainData = query?.data?.data;
+
+  // Relations: route & station
+  const routeSelect = useSelect({
+    resource: "route",
+    defaultValue: trainData?.route?.id,
     optionLabel: "name",
     optionValue: "id",
+    // queryOptions: { enabled: !!trainData?.route },
   });
 
-  const { options: routeOptions } = useSelect({
-    resource: "route",
+  const stationSelect = useSelect({
+    resource: "station",
+    defaultValue: trainData?.nextStation?.id,
     optionLabel: "name",
     optionValue: "id",
+    // queryOptions: { enabled: !!trainData?.nextStation },
   });
 
   function onSubmit(values: Record<string, any>) {
@@ -49,7 +55,7 @@ export const TrainCreate = () => {
   }
 
   return (
-    <CreateView>
+    <EditView>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           {/* Name */}
@@ -117,7 +123,6 @@ export const TrainCreate = () => {
           <FormField
             control={form.control}
             name="manufacturer"
-            rules={{ required: "Manufacturer is required" }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Manufacturer</FormLabel>
@@ -137,7 +142,6 @@ export const TrainCreate = () => {
           <FormField
             control={form.control}
             name="yearBuilt"
-            rules={{ required: "Year Built is required" }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Year Built</FormLabel>
@@ -160,7 +164,7 @@ export const TrainCreate = () => {
             name="avgSpeed"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Average Speed</FormLabel>
+                <FormLabel>Average Speed (km/h)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -182,7 +186,10 @@ export const TrainCreate = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={"active"}>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value || ""}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select status" />
@@ -190,8 +197,8 @@ export const TrainCreate = () => {
                   </FormControl>
                   <SelectContent>
                     <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
                     <SelectItem value="maintenance">Maintenance</SelectItem>
+                    <SelectItem value="retired">Retired</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -199,7 +206,7 @@ export const TrainCreate = () => {
             )}
           />
 
-          {/* Next Station (relation) */}
+          {/* Next Station */}
           <FormField
             control={form.control}
             name="nextStation.id"
@@ -216,7 +223,7 @@ export const TrainCreate = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {stationOptions?.map((option) => (
+                    {stationSelect.options?.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
                         {option.label}
                       </SelectItem>
@@ -228,7 +235,7 @@ export const TrainCreate = () => {
             )}
           />
 
-          {/* Route (relation) */}
+          {/* Route */}
           <FormField
             control={form.control}
             name="route.id"
@@ -245,7 +252,7 @@ export const TrainCreate = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {routeOptions?.map((option) => (
+                    {routeSelect.options?.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
                         {option.label}
                       </SelectItem>
@@ -257,14 +264,14 @@ export const TrainCreate = () => {
             )}
           />
 
-          {/* Submit */}
+          {/* Buttons */}
           <div className="flex gap-2">
             <Button
               type="submit"
               {...form.saveButtonProps}
               disabled={form.formState.isSubmitting}
             >
-              {form.formState.isSubmitting ? "Creating..." : "Create"}
+              {form.formState.isSubmitting ? "Updating..." : "Update"}
             </Button>
             <Button
               type="button"
@@ -276,6 +283,6 @@ export const TrainCreate = () => {
           </div>
         </form>
       </Form>
-    </CreateView>
+    </EditView>
   );
 };
