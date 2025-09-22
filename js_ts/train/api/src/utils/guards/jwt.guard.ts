@@ -40,7 +40,6 @@ export class JwtAuthGuard implements CanActivate {
 
     const user = await this.userRepository.findOne({
       where: { id: payload.id },
-      relations: ['roles'],
     });
 
     if (roles) {
