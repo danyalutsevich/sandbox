@@ -10,9 +10,9 @@ import {
 import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RegisterDto } from './dto/register.dto';
-import { LoginDto } from './dto/Login.dto';
+import { LoginDto } from './dto/login.dto';
 // import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ResetPasswordDto } from './dto/ResetPassword.dto';
+import { ResetPasswordDto } from './dto/resetPassword.dto';
 // import { EventType } from '@/utils/enums/EventType.enum';
 import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
 
