@@ -1,3 +1,8 @@
+## Deploy
+
+- Swagger API: [train-api.danlutsevych.online/docs](https://train-api.danlutsevych.online/docs#/)
+- Admin panel: [train-admin.danlutsevych.online](https://train-admin.danlutsevych.online/)
+
 ## Train App — Monorepo (API, Admin, Mobile App)
 
 A small monorepo that includes a NestJS API, a web Admin dashboard, and a React Native (Expo) mobile app for browsing stations, trains, and schedules with favorites.
