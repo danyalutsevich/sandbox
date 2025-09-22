@@ -21,14 +21,13 @@ export const authProvider: AuthProvider = {
 
     const resData = await res.json();
 
-    console.log(resData);
     if (res.ok && resData?.jwt && resData?.user && resData?.refresh) {
       localStorage.setItem(TOKEN_KEY, resData.jwt);
       localStorage.setItem("refreshToken", resData.refresh);
       localStorage.setItem("user", JSON.stringify(resData.user));
       return {
         success: true,
-        redirectTo: "/user",
+        redirectTo: "/",
       };
     }
 
