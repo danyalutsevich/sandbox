@@ -20,6 +20,7 @@ A small monorepo that includes a NestJS API, a web Admin dashboard, and a React 
 ## Technologies Used (EN)
 
 ### Backend (api/)
+
 - **NestJS**: modular server framework
 - **TypeORM**: ORM for PostgreSQL
 - **PostgreSQL**: primary database
@@ -28,11 +29,13 @@ A small monorepo that includes a NestJS API, a web Admin dashboard, and a React 
 - Modules: `auth`, `user`, `station`, `route`, `train`, `schedule`, `favorite`
 
 ### Admin (admin/)
+
 - **Vite + React + TypeScript**
 - **Refine/shadcn-like UI kit** under `src/components`
 - Routing and CRUD pages for domain modules
 
 ### Mobile App (app/)
+
 - **Expo + React Native + TypeScript**
 - **expo-router** for navigation
 - **nativewind (Tailwind CSS for RN)** for styling
@@ -67,6 +70,7 @@ A small monorepo that includes a NestJS API, a web Admin dashboard, and a React 
 ## Технології (UKR)
 
 ### Backend (api/)
+
 - **NestJS**: модульний серверний фреймворк
 - **TypeORM**: ORM для PostgreSQL
 - **PostgreSQL**: основна база даних
@@ -75,11 +79,13 @@ A small monorepo that includes a NestJS API, a web Admin dashboard, and a React 
 - Модулі: `auth`, `user`, `station`, `route`, `train`, `schedule`, `favorite`
 
 ### Адмін-панель (admin/)
+
 - **Vite + React + TypeScript**
 - **Refine/shadcn-подібний UI набір** у `src/components`
 - Маршрути та сторінки для CRUD по сутностях
 
 ### Мобільний застосунок (app/)
+
 - **Expo + React Native + TypeScript**
 - **expo-router** для навігації
 - **nativewind (Tailwind для RN)** для стилів
@@ -130,5 +136,3 @@ A small monorepo that includes a NestJS API, a web Admin dashboard, and a React 
 - E2E та unit тести (API і застосунок)
 - CI/CD пайплайни та Docker образи
 - Локалізація (EN/UKR) для мобільного та адмінки
-
-
