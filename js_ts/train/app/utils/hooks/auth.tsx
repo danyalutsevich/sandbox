@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 import { useRouter } from "expo-router";
+import { User } from "../types/user";
 
 interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
@@ -10,20 +12,28 @@ interface AuthContextType {
     email: string,
     password: string,
   ) => Promise<void>;
-  user: { id: string; email: string } | null;
-  jwt?: string;
-  refresh?: string;
+  user: User | null;
+  jwt?: string | null;
+  refresh?: string | null;
 }
 
 export const AuthContext = React.createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const [user, setUser] = React.useState<{ id: string; email: string } | null>(
-    null,
+
+  // POTENTIAL THROW JSON PARSE ERROR
+  const [user, setUser] = React.useState<User | null>(
+    JSON.parse(SecureStore.getItem("user") || "null"),
   );
-  const [jwt, setJwt] = React.useState<string | null>(null);
-  const [refresh, setRefresh] = React.useState<string | null>(null);
+
+  const [jwt, setJwt] = React.useState<string | null>(
+    SecureStore.getItem("jwt"),
+  );
+
+  const [refresh, setRefresh] = React.useState<string | null>(
+    SecureStore.getItem("refresh"),
+  );
 
   const login = async (email: string, password: string) => {
     console.log("login");
@@ -37,6 +47,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(res.data.user);
     setJwt(res.data.jwt);
     setRefresh(res.data.refresh);
+
+    SecureStore.setItem("jwt", res.data.jwt);
+    SecureStore.setItem("refresh", res.data.refresh);
+    SecureStore.setItem("user", JSON.stringify(res.data.user));
+
     router.replace("/(tabs)");
   };
 
@@ -45,6 +60,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     setJwt(null);
     setRefresh(null);
+
+    await SecureStore.deleteItemAsync("jwt");
+    await SecureStore.deleteItemAsync("refresh");
+    await SecureStore.deleteItemAsync("user");
+
     router.replace("/(auth)/login");
   };
 
@@ -64,7 +84,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, register, user }}>
+    <AuthContext.Provider
+      value={{ login, logout, register, user, jwt, refresh }}
+    >
       {children}
     </AuthContext.Provider>
   );

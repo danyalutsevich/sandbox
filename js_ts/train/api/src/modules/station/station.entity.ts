@@ -15,10 +15,10 @@ export class StationEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: 'float' })
   lat: number;
 
-  @Column()
+  @Column({ type: 'float' })
   lng: number;
 
   @Column()
