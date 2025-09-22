@@ -1,9 +1,12 @@
 import { Controller, UseGuards } from '@nestjs/common';
-import { Crud, CrudController } from '@dataui/crud';
+import { Crud, CrudAuth, CrudController } from '@dataui/crud';
 import { StationEntity } from './station.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { StationService } from './station.service';
 import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
+import { hasRole } from '@/utils/fuctions/hasRole';
+import { Role } from '@/utils/enums/role.enum';
+import { Roles } from '@/utils/decorators/role.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Crud({
@@ -14,10 +17,18 @@ import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
     softDelete: true,
     join: {},
   },
-  // routes: {
-  //   exclude: ['getManyBase', 'getOneBase'],
-  // },
+  routes: {
+    getManyBase: { decorators: [Roles([Role.admin, Role.user])] },
+    getOneBase: { decorators: [Roles([Role.admin, Role.user])] },
+    createOneBase: { decorators: [Roles([Role.admin])] },
+    createManyBase: { decorators: [Roles([Role.admin])] },
+    updateOneBase: { decorators: [Roles([Role.admin])] },
+    replaceOneBase: { decorators: [Roles([Role.admin])] },
+    deleteOneBase: { decorators: [Roles([Role.admin])] },
+    recoverOneBase: { decorators: [Roles([Role.admin])] },
+  },
 })
+@ApiBearerAuth()
 @ApiTags('Station')
 @Controller('station')
 export class StationController implements CrudController<StationEntity> {

@@ -1,9 +1,12 @@
-import { Crud, CrudController } from '@dataui/crud';
+import { Crud, CrudAuth, CrudController } from '@dataui/crud';
 import { ScheduleEntity } from './schedule.entity';
 import { ScheduleService } from './schedule.service';
 import { Controller, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
+import { hasRole } from '@/utils/fuctions/hasRole';
+import { Role } from '@/utils/enums/role.enum';
+import { Roles } from '@/utils/decorators/role.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Crud({
@@ -32,7 +35,19 @@ import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
       },
     },
   },
+
+  routes: {
+    getManyBase: { decorators: [Roles([Role.admin, Role.user])] },
+    getOneBase: { decorators: [Roles([Role.admin, Role.user])] },
+    createOneBase: { decorators: [Roles([Role.admin])] },
+    createManyBase: { decorators: [Roles([Role.admin])] },
+    updateOneBase: { decorators: [Roles([Role.admin])] },
+    replaceOneBase: { decorators: [Roles([Role.admin])] },
+    deleteOneBase: { decorators: [Roles([Role.admin])] },
+    recoverOneBase: { decorators: [Roles([Role.admin])] },
+  },
 })
+@ApiBearerAuth()
 @ApiTags('Schedule')
 @Controller('schedule')
 export class ScheduleController implements CrudController<ScheduleEntity> {
