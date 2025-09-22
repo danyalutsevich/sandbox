@@ -1,9 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { Crud, CrudController } from '@dataui/crud';
 import { StationEntity } from './station.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { StationService } from './station.service';
+import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
 
+@UseGuards(JwtAuthGuard)
 @Crud({
   model: {
     type: StationEntity,
@@ -19,5 +21,5 @@ import { StationService } from './station.service';
 @ApiTags('Station')
 @Controller('station')
 export class StationController implements CrudController<StationEntity> {
-  constructor(public service: StationService) { }
+  constructor(public service: StationService) {}
 }

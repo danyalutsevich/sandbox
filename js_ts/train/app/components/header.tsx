@@ -40,7 +40,7 @@ export function Header({ }: HeaderProps) {
         {settings.currentStationId ? (
           <View className="bg-blue-100 rounded-full px-3 py-1">
             <Text className="text-blue-700 font-medium">
-              You are at: {station.data ? station.data.name : "Loading..."}
+              {station.data ? station.data.name : "Loading..."}
             </Text>
           </View>
         ) : (

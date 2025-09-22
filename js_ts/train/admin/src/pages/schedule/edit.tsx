@@ -34,15 +34,19 @@ export const ScheduleEdit = () => {
   const scheduleData = query?.data?.data;
 
   const { options: routeOptions } = useSelect({
-    resource: "routes",
+    resource: "route",
     defaultValue: scheduleData?.route,
-    queryOptions: { enabled: !!scheduleData?.route },
+    optionLabel: "name",
+    optionValue: "id",
+    // queryOptions: { enabled: !!scheduleData?.route },
   });
 
   const { options: trainOptions } = useSelect({
-    resource: "trains",
+    resource: "train",
     defaultValue: scheduleData?.train,
-    queryOptions: { enabled: !!scheduleData?.train },
+    optionLabel: "name",
+    optionValue: "id",
+    // queryOptions: { enabled: !!scheduleData?.train },
   });
 
   function onSubmit(values: any) {

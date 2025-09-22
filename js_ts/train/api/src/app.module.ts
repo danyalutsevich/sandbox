@@ -9,6 +9,7 @@ import { StationModule } from './modules/station/station.module';
 import { RouteModule } from './modules/route/route.module';
 import { UserModule } from './modules/user/user.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
+import { FavoriteModule } from './modules/favorite/favorite.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ScheduleModule } from './modules/schedule/schedule.module';
     StationModule,
     RouteModule,
     ScheduleModule,
+    FavoriteModule,
   ],
 })
 export class AppModule { }

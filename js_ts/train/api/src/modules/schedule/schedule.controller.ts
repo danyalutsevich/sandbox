@@ -1,9 +1,11 @@
 import { Crud, CrudController } from '@dataui/crud';
 import { ScheduleEntity } from './schedule.entity';
 import { ScheduleService } from './schedule.service';
-import { Controller } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
 
+@UseGuards(JwtAuthGuard)
 @Crud({
   model: {
     type: ScheduleEntity,
@@ -19,11 +21,20 @@ import { ApiTags } from '@nestjs/swagger';
         alias: 'train',
         eager: true,
       },
+      'train.nextStation': {
+        alias: 'nextStation',
+      },
+      'route.originStation': {
+        alias: 'originStation',
+      },
+      'route.destinationStation': {
+        alias: 'destinationStation',
+      },
     },
   },
 })
-@ApiTags('schedule')
+@ApiTags('Schedule')
 @Controller('schedule')
 export class ScheduleController implements CrudController<ScheduleEntity> {
-  constructor(public service: ScheduleService) { }
+  constructor(public service: ScheduleService) {}
 }
