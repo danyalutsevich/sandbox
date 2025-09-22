@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { useRouter } from "expo-router";
+import { axiosInstance } from "../axiosInstance";
 import { User } from "../types/user";
 
 interface AuthContextType {
@@ -35,6 +36,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     SecureStore.getItem("refresh"),
   );
 
+  useEffect(() => {
+    console.log("AuthProvider mounted");
+    axiosInstance.defaults.headers.common["Authorization"] =
+      `Bearer ${SecureStore.getItem("jwt")}` || "";
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        if (error.response?.status === 401 || error.response?.status === 403) {
+          // TODO: try to refresh token first
+          logout();
+        }
+        return Promise.reject(error);
+      },
+    );
+  }, [jwt]);
+
   const login = async (email: string, password: string) => {
     console.log("login");
     const res = await axios.post(
@@ -44,9 +64,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         password,
       },
     );
+
     setUser(res.data.user);
     setJwt(res.data.jwt);
     setRefresh(res.data.refresh);
+
+    axiosInstance.defaults.headers.common["Authorization"] =
+      `Bearer ${res.data.jwt}`;
 
     SecureStore.setItem("jwt", res.data.jwt);
     SecureStore.setItem("refresh", res.data.refresh);

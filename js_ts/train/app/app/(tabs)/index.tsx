@@ -8,6 +8,7 @@ import { Header } from "@/components/header";
 import { Text } from "@/components/ui/text";
 import { useSettings } from "@/utils/hooks/settings";
 import { ScheduleCard } from "@/components/cards/schedule-card";
+import { EmptyList } from "@/components/ui/empty-list";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -49,6 +50,7 @@ export default function HomeScreen() {
       <FlatList
         data={settings.currentStationId ? schedules.data : []}
         keyExtractor={(item) => item.id.toString()}
+        ListEmptyComponent={<EmptyList />}
         renderItem={({ item }) => (
           <ScheduleCard
             schedule={item}
