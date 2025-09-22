@@ -11,7 +11,7 @@ import routerProvider, {
 } from "@refinedev/react-router";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
-import { authProvider } from "./authProvider";
+import { authProvider, TOKEN_KEY } from "./authProvider";
 import { ErrorComponent } from "./components/refine-ui/layout/error-component";
 import { Layout } from "./components/refine-ui/layout/layout";
 import { Toaster } from "./components/refine-ui/notification/toaster";
@@ -59,10 +59,29 @@ import {
   TrainIcon,
   UserIcon,
 } from "lucide-react";
+import { axiosInstance } from "./utils/axiosInstance";
 
 function App() {
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
-  const dataProvider = nestjsxCrudDataProvider(API_URL);
+
+  axiosInstance.interceptors.request.use(function (config) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem(TOKEN_KEY)}`;
+    return config;
+  });
+
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
+      return Promise.reject(error);
+    }
+  );
+  const dataProvider = nestjsxCrudDataProvider(API_URL, axiosInstance);
 
   return (
     <BrowserRouter>
