@@ -27,7 +27,7 @@ export const authProvider: AuthProvider = {
       localStorage.setItem("user", JSON.stringify(resData.user));
       return {
         success: true,
-        redirectTo: "/",
+        redirectTo: "/user",
       };
     }
 
