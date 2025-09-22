@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Text } from "@/components/ui/text";
 import { useAuth } from "@/utils/hooks/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
 export default function Login() {
@@ -18,8 +19,15 @@ export default function Login() {
   });
 
   return (
-    <SafeAreaView className="flex-1 justify-center bg-background px-4 ">
-      <Card className="space-y-4 p-4">
+    <SafeAreaView className="flex-1 bg-background px-4 ">
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View className="flex-1 justify-center">
+            <Card className="space-y-4 p-4">
         <Label className="px-2">Email</Label>
 
         <Controller
@@ -77,7 +85,10 @@ export default function Login() {
         >
           <Text>Login</Text>
         </Button>
-      </Card>
+            </Card>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

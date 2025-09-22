@@ -36,7 +36,7 @@ export function Header({ }: HeaderProps) {
       }}
       activeOpacity={0.7}
     >
-      <View className="bg-white px-4 py-5 flex-row items-center justify-between">
+      <View className="bg-card px-4 py-5 flex-row items-center justify-between border-b border-border">
         {settings.currentStationId ? (
           <View className="bg-blue-100 rounded-full px-3 py-1">
             <Text className="text-blue-700 font-medium">
@@ -44,7 +44,7 @@ export function Header({ }: HeaderProps) {
             </Text>
           </View>
         ) : (
-          <Text className="text-green-700 font-medium">Select Station</Text>
+          <Text className="text-muted-foreground font-medium">Select Station</Text>
         )}
 
         <TouchableOpacity

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ScrollView, View, Text, useColorScheme } from "react-native";
+import { ScrollView, View, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { UserIcon, Mail, Calendar, Shield } from "lucide-react-native";
-
+import { Text } from "@/components/ui/text";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -212,12 +212,12 @@ export default function SettingsScreen() {
           <View style={{ flexDirection: "row", gap: 12 }}>
             {!isEditingProfile ? (
               <Button onPress={() => setIsEditingProfile(true)}>
-                <Text className="text-white">Edit Profile</Text>
+                <Text>Edit Profile</Text>
               </Button>
             ) : (
               <>
                 <Button onPress={handleProfileUpdate} style={{ flex: 1 }}>
-                  <Text className="text-white">Save Changes</Text>
+                  <Text>Save Changes</Text>
                 </Button>
                 <Button
                   variant="outline"
@@ -292,7 +292,7 @@ export default function SettingsScreen() {
             <Button
               variant="outline"
               onPress={() => setShowPasswordResetDialog(true)}
-            // icon={<Key color={colors.foreground} size={16} />}
+              // icon={<Key color={colors.foreground} size={16} />}
             >
               <Text>Change Password</Text>
             </Button>
@@ -330,7 +330,7 @@ export default function SettingsScreen() {
             <AlertDialogTrigger asChild>
               <Button
                 variant="destructive"
-              // icon={<LogOut color={colors.destructiveForeground} size={16} />}
+                // icon={<LogOut color={colors.destructiveForeground} size={16} />}
               >
                 <Text>Logout</Text>
               </Button>
