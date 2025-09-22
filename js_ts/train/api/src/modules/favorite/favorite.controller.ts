@@ -1,6 +1,6 @@
 import { Crud, CrudAuth, CrudController } from '@dataui/crud';
 import { Controller, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { FavoriteEntity } from './favorite.entity';
 import { FavoriteService } from './favorite.service';
 import { hasRole } from '@/utils/fuctions/hasRole';
@@ -30,6 +30,7 @@ import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
     return hasRole(user, Role.admin) ? {} : { user: { id: user.id } };
   },
 })
+@ApiBearerAuth()
 @ApiTags('Favorite')
 @Controller('favorite')
 export class FavoriteController implements CrudController<FavoriteEntity> {
