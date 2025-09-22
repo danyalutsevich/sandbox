@@ -2,7 +2,7 @@ import { Crud, CrudAuth, CrudController } from '@dataui/crud';
 import { ScheduleEntity } from './schedule.entity';
 import { ScheduleService } from './schedule.service';
 import { Controller, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, PartialType } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
 import { hasRole } from '@/utils/fuctions/hasRole';
 import { Role } from '@/utils/enums/role.enum';
@@ -12,6 +12,11 @@ import { Roles } from '@/utils/decorators/role.decorator';
 @Crud({
   model: {
     type: ScheduleEntity,
+  },
+  dto: {
+    create: ScheduleEntity,
+    update: PartialType(ScheduleEntity),
+    replace: ScheduleEntity,
   },
   query: {
     softDelete: true,

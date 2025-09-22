@@ -1,3 +1,4 @@
+import { IsNumber, IsString } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -12,15 +13,19 @@ export class StationEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @IsString()
   @Column()
   name: string;
 
+  @IsNumber()
   @Column({ type: 'float' })
   lat: number;
 
+  @IsNumber()
   @Column({ type: 'float' })
   lng: number;
 
+  @IsNumber()
   @Column()
   code: string;
 

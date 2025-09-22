@@ -9,7 +9,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const PORT = process.env.PORT ?? 3000;
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: false,
+      forbidNonWhitelisted: false,
+    }),
+  );
   app.useGlobalFilters(new DBQueryExceptionFilter());
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));

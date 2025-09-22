@@ -1,3 +1,7 @@
+## Demo Video
+
+Watch the demo: [https://youtu.be/sfyqZmu1GeM](https://youtu.be/sfyqZmu1GeM)
+
 ## Deploy
 
 - Swagger API: [train-api.danlutsevych.online/docs](https://train-api.danlutsevych.online/docs#/)
@@ -104,5 +108,27 @@ A small monorepo that includes a NestJS API, a web Admin dashboard, and a React 
   - Усі для станції (або-або): комбінувати фільтри через `or`
 - `POST /favorite`: створити «в обране» `{ schedule: { id } }`
 - `GET /favorite?filter=schedule.id||$eq||{id}`: перевірити, чи додано до обраного
+
+## To Do
+
+- Add favorites list screen on mobile (view/remove favorites)
+- Pagination and search for schedules and stations
+- Offline cache for last schedules (React Query persist)
+- Push notifications for saved routes (departures/alerts)
+- Role-based access and guards in Admin
+- E2E and unit tests (API and App)
+- CI/CD pipelines and Docker images
+- i18n for mobile and admin (EN/UKR)
+
+## План робіт (UKR)
+
+- Екран обраного у мобільному (перегляд/видалення)
+- Пагінація та пошук для розкладів і станцій
+- Офлайн-кеш останніх розкладів (React Query persist)
+- Push-сповіщення для збережених маршрутів
+- Ролі та гардии у Адмін-панелі
+- E2E та unit тести (API і застосунок)
+- CI/CD пайплайни та Docker образи
+- Локалізація (EN/UKR) для мобільного та адмінки
 
 

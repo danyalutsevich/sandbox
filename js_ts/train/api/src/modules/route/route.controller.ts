@@ -2,7 +2,7 @@ import { Crud, CrudAuth, CrudController } from '@dataui/crud';
 import { RouteEntity } from './route.entity';
 import { RouteService } from './route.service';
 import { Controller, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, PartialType } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
 import { hasRole } from '@/utils/fuctions/hasRole';
 import { Role } from '@/utils/enums/role.enum';
@@ -12,6 +12,11 @@ import { Roles } from '@/utils/decorators/role.decorator';
 @Crud({
   model: {
     type: RouteEntity,
+  },
+  dto: {
+    create: RouteEntity,
+    update: PartialType(RouteEntity),
+    replace: RouteEntity,
   },
   query: {
     softDelete: true,

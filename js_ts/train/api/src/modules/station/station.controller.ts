@@ -1,7 +1,7 @@
 import { Controller, UseGuards } from '@nestjs/common';
 import { Crud, CrudAuth, CrudController } from '@dataui/crud';
 import { StationEntity } from './station.entity';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, PartialType } from '@nestjs/swagger';
 import { StationService } from './station.service';
 import { JwtAuthGuard } from '@/utils/guards/jwt.guard';
 import { hasRole } from '@/utils/fuctions/hasRole';
@@ -12,6 +12,11 @@ import { Roles } from '@/utils/decorators/role.decorator';
 @Crud({
   model: {
     type: StationEntity,
+  },
+  dto: {
+    create: StationEntity,
+    update: PartialType(StationEntity),
+    replace: StationEntity,
   },
   query: {
     softDelete: true,
