@@ -1,0 +1,96 @@
+services:
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`train-api.danlutsevych.online`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.api.tls.certresolver=myresolver"
+    restart: always
+    env_file:
+      - ./api/.env
+    ports:
+      - "3001:3000"
+    networks:
+      - web
+
+  admin:
+    build:
+      context: admin
+      dockerfile: Dockerfile
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin.rule=Host(`train-admin.danlutsevych.online`)"
+      - "traefik.http.routers.admin.entrypoints=websecure"
+      - "traefik.http.routers.admin.tls=true"
+      - "traefik.http.routers.admin.tls.certresolver=myresolver"
+    restart: always
+    env_file:
+      - ./admin/.env
+    ports:
+      - "3002:3000"
+    networks:
+      - web
+
+  traefik:
+    image: traefik:v3.4
+    restart: unless-stopped
+    command:
+      - "--global.checknewversion=false"
+      - "--global.sendanonymoususage=false"
+
+      - "--api=true"
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--log.level=DEBUG"
+
+      - "--tracing=true"
+      - "--tracing.addinternals=true"
+      - "--tracing.serviceName=traefik"
+      - "--tracing.samplerate=0.2"
+
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+
+      - "--entrypoints.websecure.address=:443"
+
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=websecure"
+      - "--certificatesresolvers.myresolver.acme.email=luchevich31@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+
+    # Labels for Traefik Dashboard
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mydashboard.rule=Host(`danlutsevych.online`)
+      - traefik.http.routers.mydashboard.service=api@internal
+      - traefik.http.routers.mydashboard.middlewares=myauth
+      - traefik.http.middlewares.myauth.basicauth.users=admin:$$apr1$$SYZZ6EX6$$023Xwk4bD1bePyEf/I7ce1
+
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - letsencrypt:/letsencrypt
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+
+volumes:
+  letsencrypt:
+    name: letsencrypt

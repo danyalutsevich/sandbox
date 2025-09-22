@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "create:small_andesite_brick_slab"
+    },
+    {
+      "item": "create:small_andesite_brick_slab"
+    }
+  ],
+  "result": {
+    "item": "create:small_andesite_bricks"
+  }
+}

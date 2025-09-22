@@ -1,9 +1,9 @@
-#import "SampleNativeModuleProvider.h"
+#import "NativeSampleModuleProvider.h"
 #import <ReactCommon/CallInvoker.h>
 #import <ReactCommon/TurboModule.h>
 #import "NativeSampleModule.h"
 
-@implementation SampleNativeModuleProvider
+@implementation NativeSampleModuleProvider
 
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
     (const facebook::react::ObjCTurboModule::InitParams &)params

@@ -1,0 +1,385 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
+        maven { url = 'https://maven.parchmentmc.org' }
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:${forgegradle_version}"
+        classpath "org.spongepowered:mixingradle:${mixingradle_version}"
+        classpath "org.parchmentmc:librarian:${librarian_version}"
+    }
+}
+
+plugins {
+    id 'com.matthewprenger.cursegradle' version "${cursegradle_version}"
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+
+jarJar.enable()
+
+boolean dev = System.getenv('RELEASE') == null || System.getenv('RELEASE').equals('false');
+// jozu: I use a gradle workspace with both projects.
+// The project is named Flywheel-Forge, but sub-projects are named by folder.
+boolean inWorkspace = findProject(':Flywheel') != null
+
+ext.buildNumber = System.getenv('BUILD_NUMBER')
+
+group = 'com.simibubi.create'
+archivesBaseName = "create-${artifact_minecraft_version}"
+version = mod_version + (dev && buildNumber != null ? "-${buildNumber}" : '')
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + ' (' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+minecraft {
+    if (Boolean.parseBoolean(project.use_parchment)) {
+        mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
+    } else {
+        mappings channel: 'official', version: "${minecraft_version}"
+    }
+
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            arg '-mixin.config=create.mixins.json'
+            //jvmArgs '-XX:+UnlockCommercialFeatures' // uncomment for profiling
+            //jvmArgs '-XX:+IgnoreUnrecognizedVMOptions', '-XX:+AllowEnhancedClassRedefinition' // uncomment with jbr
+            property 'forge.logging.console.level', 'info'
+            mods {
+                create {
+                    source sourceSets.main
+                }
+
+                if (inWorkspace) {
+                    flywheel {
+                        source project(":Flywheel").sourceSets.main
+                    }
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+            arg '-mixin.config=create.mixins.json'
+            property 'forge.logging.console.level', 'info'
+            mods {
+                create {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            arg '-mixin.config=create.mixins.json'
+            property 'forge.logging.markers', 'REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'create', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
+            mods {
+                create {
+                    source sourceSets.main
+                }
+
+                if (inWorkspace) {
+                    flywheel {
+                        source project(":Flywheel").sourceSets.main
+                    }
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run/gametest')
+            arg '-mixin.config=create.mixins.json'
+            property 'forge.logging.console.level', 'info'
+            mods {
+                create {
+                    source sourceSets.main
+                }
+            }
+            // setForceExit false <- FIXME 1.20
+        }
+    }
+}
+
+repositories {
+    maven {
+        // location of the maven for Registrate and Flywheel
+        name = 'tterrag maven'
+        url = 'https://maven.tterrag.com'
+    }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        // location of the maven for Vazkii's mods
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    /*maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }*/
+    maven {
+        // location of the maven for Dynamic Trees
+        url = 'https://harleyoconnor.com/maven'
+    }
+    maven {
+        // location of the maven for Curios API
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        // location of maven for CC: Tweaked
+        name = "squiddev"
+        url = "https://squiddev.cc/maven/"
+    }
+
+    maven {
+        url = 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+
+    mavenLocal()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    jarJar("com.tterrag.registrate:Registrate:${registrate_version}") {
+        jarJar.ranged(it, '[MC1.19.3-1.1.10,)')
+    }
+    jarJar("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}") {
+        jarJar.ranged(it, '[0.6.11,)')
+    }
+
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+
+    if (inWorkspace) {
+        implementation project(':Flywheel')
+    } else {
+        implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+    }
+
+    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
+
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}+${curios_minecraft_version}")
+
+	if (cc_tweaked_enable.toBoolean()) {
+	    compileOnly("cc.tweaked:cc-tweaked-${cc_tweaked_minecraft_version}-core-api:${cc_tweaked_version}")
+        compileOnly fg.deobf("cc.tweaked:cc-tweaked-${cc_tweaked_minecraft_version}-forge-api:${cc_tweaked_version}")
+        runtimeOnly fg.deobf("cc.tweaked:cc-tweaked-${cc_tweaked_minecraft_version}-forge:${cc_tweaked_version}")
+	}
+
+    if (dynamic_trees_enable.toBoolean()) {
+        compileOnly fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-${dynamic_trees_minecraft_version}:${dynamic_trees_version}")
+    }
+
+    // implementation fg.deobf("curse.maven:ic2-classic-242942:5555152")
+    // implementation fg.deobf("curse.maven:druidcraft-340991:3101903")
+    // implementation fg.deobf("com.railwayteam.railways:railways-1.19.2-1.6.4:all") { transitive = false }
+
+    // runtimeOnly fg.deobf("curse.maven:framedblocks-441647:5399211")
+    // runtimeOnly fg.deobf("curse.maven:galosphere-631098:4574834")
+    // runtimeOnly fg.deobf("curse.maven:elementary-ores-332609:4514276") 1.19.4 only
+    // runtimeOnly fg.deobf("curse.maven:flib-661261:4479544")
+    // runtimeOnly fg.deobf("curse.maven:infernal-expansion-395078:4002091")
+    // runtimeOnly fg.deobf("vazkii.autoreglib:AutoRegLib:1.8.2-58.126")
+    // runtimeOnly fg.deobf("curse.maven:quark-243121:4812006")
+    // runtimeOnly fg.deobf("curse.maven:mantle-74924:5339977")
+    // runtimeOnly fg.deobf("curse.maven:tinkers-construct-74072:5358052")
+    // runtimeOnly fg.deobf("maven.modrinth:rubidium:0.6.2c")
+    // runtimeOnly fg.deobf("maven.modrinth:aether:1.19.2-1.4.2-forge")
+    // runtimeOnly fg.deobf("maven.modrinth:spark:1.10.38-forge")
+    // runtimeOnly fg.deobf("curse.maven:forbidden-arcanus-309858:4852521")
+    // runtimeOnly fg.deobf("curse.maven:valhelsia-core-416935:4181245")
+    // runtimeOnly fg.deobf("curse.maven:modern-ui-352491:5229370")
+    // runtimeOnly fg.deobf("curse.maven:sophisticated-storage-619320:5194750")
+    // runtimeOnly fg.deobf("curse.maven:sophisticated-core-618298:5296313")
+    // runtimeOnly fg.deobf("curse.maven:functional-storage-556861:5499169")
+    // runtimeOnly fg.deobf("curse.maven:titanium-287342:5356458")
+    // runtimeOnly fg.deobf("curse.maven:storage-drawers-223852:3884263")
+    // runtimeOnly fg.deobf("curse.maven:ftb-chunks-forge-314906:5417874")
+    // runtimeOnly fg.deobf("curse.maven:architectury-api-419699:5137942")
+    // runtimeOnly fg.deobf("curse.maven:ftb-library-forge-404465:4661834")
+    // runtimeOnly fg.deobf("curse.maven:ftb-teams-forge-404468:4611938")
+    // runtimeOnly fg.deobf("curse.maven:citadel-331936:4556677")
+    // runtimeOnly fg.deobf("curse.maven:ice-and-fire-dragons-264231:5037952")
+    // runtimeOnly fg.deobf("curse.maven:exnihilosequentia-400012:4993344")
+    // runtimeOnly fg.deobf("curse.maven:upgrade-aquatic-326895:4777515")
+    // runtimeOnly fg.deobf("curse.maven:blueprint-382216:4749000")
+    // runtimeOnly fg.deobf("curse.maven:windsweptmod-636321:4817132")
+    // runtimeOnly fg.deobf("curse.maven:good-ending-690161:4363719")
+
+    // https://discord.com/channels/313125603924639766/725850371834118214/910619168821354497
+    // Prevent Mixin annotation processor from getting into IntelliJ's annotation processor settings
+    // This allows 'Settings > Build, Execution, and Deployment > Build Tools > Gradle > Build and run using' set to IntelliJ to work correctly
+    if (!Boolean.getBoolean('idea.sync.active')) {
+        annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
+    }
+}
+
+sourceSets.main.java {
+	if (!cc_tweaked_enable.toBoolean()) {
+        exclude 'com/simibubi/create/compat/computercraft/implementation/**'
+	}
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+    exclude '.cache/'
+}
+
+mixin {
+    add sourceSets.main, 'create.refmap.json'
+}
+
+// Workaround for SpongePowered/MixinGradle#38
+afterEvaluate {
+    tasks.configureReobfTaskForReobfJar.mustRunAfter(tasks.compileJava)
+    tasks.configureReobfTaskForReobfJarJar.mustRunAfter(tasks.compileJava)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+compileJava {
+    options.compilerArgs = ['-Xdiags:verbose']
+}
+
+jar {
+    archiveClassifier = 'slim'
+    manifest {
+        attributes([
+            'Specification-Title': 'create',
+            'Specification-Vendor': 'simibubi',
+            'Specification-Version': '1',
+            'Implementation-Title': project.jar.archiveBaseName,
+            'Implementation-Version': project.jar.archiveVersion,
+            'Implementation-Vendor': 'simibubi',
+            'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            'MixinConfigs': 'create.mixins.json'
+        ])
+    }
+}
+
+task jarJarRelease {
+    group = 'jarjar'
+    doLast {
+        tasks.jarJar {
+            archiveClassifier = ''
+        }
+    }
+    finalizedBy tasks.jarJar
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+void addLicense(jarTask) {
+    jarTask.from('LICENSE') {
+        rename { "${it}_${project.archivesBaseName}" }
+    }
+}
+
+jar.finalizedBy('reobfJar')
+tasks.jarJar.finalizedBy('reobfJarJar')
+
+addLicense(jar)
+addLicense(tasks.jarJar)
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = archivesBaseName
+
+            from components.java
+            fg.component(it)
+            jarJar.component(it)
+        }
+    }
+
+    repositories {
+        if (project.hasProperty('mavendir')) {
+            maven { url mavendir }
+        }
+    }
+}
+
+String getChangelogText() {
+    def changelogFile = file('changelog.txt')
+    String str = ''
+    int lineCount = 0
+    boolean done = false
+    changelogFile.eachLine {
+        if (done || it == null) {
+            return
+        }
+        if (it.size() > 1) {
+            def temp = it
+            if (lineCount == 0) {
+                temp = "Create ${version}"
+                temp = "<span style=\"font-size: 18px; color: #333399;\">Create v${mod_version}</span>&nbsp;&nbsp;<em>for Minecraft ${minecraft_version}</em><br/>"
+            } else if (it.startsWith('-')) {
+                temp = "&nbsp;&nbsp;&nbsp;$temp<br/>"
+                temp = temp.replaceAll("(\\S+\\/\\S+)#([0-9]+)\\b", "<a href=\"https://github.com/\$1/issues/\$2\">\$0</a>");
+                temp = temp.replaceAll("#([0-9]+)\\b(?!<\\/a>)", "<a href=\"https://github.com/$github_project/issues/\$1\">\$0</a>");
+            } else {
+                temp = "<h4>$temp</h4>"
+            }
+            str += temp
+            lineCount++
+        } else {
+            str += "<p>Please submit any Issues you come across on the&nbsp;<a href=\"https://github.com/${github_project}/issues\" rel=\"nofollow\">Issue Tracker</a>.</p>"
+            done = true
+        }
+    }
+    return str
+}
+
+// changelog debugging
+// new File("changelog.html").write getChangelogText()
+// tasks.curseforge.enabled = !dev && project.hasProperty('simi_curseforge_key')
+// curseforge {
+//     if (project.hasProperty('simi_curseforge_key')) {
+//         apiKey = project.simi_curseforge_key
+//     }
+//
+//     project {
+//         id = project.projectId
+//         changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
+//         changelogType = 'html'
+//         releaseType = project.curse_type
+//         mainArtifact(shadowJar) {
+//             displayName = "Create - ${version}"
+//         }
+//         relations {
+//             optionalDependency 'jei'
+//         }
+//     }
+// }

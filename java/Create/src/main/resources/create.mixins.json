@@ -1,0 +1,51 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "priority": 1100,
+  "package": "com.simibubi.create.foundation.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "create.refmap.json",
+  "mixins": [
+    "BlockItemMixin",
+    "ClientboundMapItemDataPacketMixin",
+    "ContraptionDriverInteractMixin",
+    "CustomItemUseEffectsMixin",
+    "EntityMixin",
+    "LavaSwimmingMixin",
+    "MainMixin",
+    "MapItemSavedDataMixin",
+    "TestCommandMixin",
+    "WaterWheelFluidSpreadMixin",
+    "accessor.AbstractProjectileDispenseBehaviorAccessor",
+    "accessor.DispenserBlockAccessor",
+    "accessor.EntityAccessor",
+    "accessor.FallingBlockEntityAccessor",
+    "accessor.GameTestHelperAccessor",
+    "accessor.LivingEntityAccessor",
+    "accessor.NbtAccounterAccessor",
+    "accessor.ServerLevelAccessor",
+    "accessor.SystemReportAccessor",
+    "accessor.UseOnContextAccessor"
+  ],
+  "client": [
+    "accessor.AgeableListModelAccessor",
+    "accessor.FontAccessor",
+    "accessor.GameRendererAccessor",
+    "accessor.HumanoidArmorLayerAccessor",
+    "accessor.MouseHandlerAccessor",
+    "accessor.ParticleEngineAccessor",
+    "client.BlockDestructionProgressMixin",
+    "client.CameraMixin",
+    "client.EntityContraptionInteractionMixin",
+    "client.GameRendererMixin",
+    "client.HeavyBootsOnPlayerMixin",
+    "client.HumanoidArmorLayerMixin",
+    "client.LevelRendererMixin",
+    "client.MapRendererMapInstanceMixin",
+    "client.PlayerRendererMixin",
+    "client.WindowResizeMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

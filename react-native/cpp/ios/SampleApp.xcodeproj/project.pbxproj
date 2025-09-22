@@ -27,8 +27,8 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EEC4CD392E689089005509FF /* NativeSampleModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NativeSampleModule.h; sourceTree = "<group>"; };
 		EEC4CD3A2E689089005509FF /* NativeSampleModule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NativeSampleModule.cpp; sourceTree = "<group>"; };
-		EEC4CD3C2E689341005509FF /* SampleNativeModuleProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleNativeModuleProvider.h; sourceTree = "<group>"; };
-		EEC4CD3D2E689341005509FF /* SampleNativeModuleProvider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleNativeModuleProvider.mm; sourceTree = "<group>"; };
+		EEC4CD3C2E689341005509FF /* NativeSampleModuleProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NativeSampleModuleProvider.h; sourceTree = "<group>"; };
+		EEC4CD3D2E689341005509FF /* NativeSampleModuleProvider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeSampleModuleProvider.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +108,8 @@
 			children = (
 				EEC4CD392E689089005509FF /* NativeSampleModule.h */,
 				EEC4CD3A2E689089005509FF /* NativeSampleModule.cpp */,
-				EEC4CD3C2E689341005509FF /* SampleNativeModuleProvider.h */,
-				EEC4CD3D2E689341005509FF /* SampleNativeModuleProvider.mm */,
+				EEC4CD3C2E689341005509FF /* NativeSampleModuleProvider.h */,
+				EEC4CD3D2E689341005509FF /* NativeSampleModuleProvider.mm */,
 			);
 			path = shared;
 			sourceTree = "<group>";

@@ -1,0 +1,26 @@
+name: Train CI/CD
+
+on:
+  push:
+    branches:
+      - base
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Save api environment file
+        run: echo "${{ vars.API_ENV }}" > js_ts/train/api/.env
+
+      - name: Save admin environment file
+        run: echo "${{ vars.ADMIN_ENV }}" > js_ts/train/admin/.env
+
+      - name: Remove all <none> images and dangling images
+        run: docker image prune -f
+
+      - name: Docker Compose up
+        run: docker compose up -d --build
+        working-directory: ./js_ts/train
