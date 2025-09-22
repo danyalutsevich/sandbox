@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/Login.dto';
-import { RegisterDto } from './dto/Register.dto';
+import { RegisterDto } from './dto/register.dto';
 import { AuthErrors } from '@utils/errors/Auth.errors';
 import * as crypto from 'crypto';
 import { MessageDto } from '@/utils/dto/message.dto';
@@ -26,7 +26,7 @@ export class AuthService {
     // private sendEmailService: SendEmailService,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
-  ) { }
+  ) {}
 
   async login(dto: LoginDto) {
     const userWithSecret = await this.userRepository.findOne({

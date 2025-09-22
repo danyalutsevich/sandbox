@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { RegisterDto } from './dto/Register.dto';
+import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/Login.dto';
 // import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ResetPasswordDto } from './dto/ResetPassword.dto';
@@ -22,7 +22,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     // private readonly eventEmitter: EventEmitter2,
-  ) { }
+  ) {}
 
   @Post('register')
   async register(@Body() dto: RegisterDto) {
