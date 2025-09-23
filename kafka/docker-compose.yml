@@ -20,3 +20,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - kafka_data:/bitnami/kafka
+
+volumes:
+  kafka_data:
+    driver: local
