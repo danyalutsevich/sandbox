@@ -19,4 +19,4 @@ services:
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@localhost:9093
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
-      - ./kafka_data:/bitnami/kafka
+      - kafka_data:/bitnami/kafka
