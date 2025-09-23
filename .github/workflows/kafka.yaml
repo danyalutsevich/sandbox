@@ -1,0 +1,20 @@
+name: Kafka
+
+on:
+  push:
+    branches:
+      - base
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Remove all <none> images and dangling images
+        run: docker image prune -f
+
+      - name: Docker Compose up
+        run: docker compose up -d --build
+        working-directory: ./kafka
