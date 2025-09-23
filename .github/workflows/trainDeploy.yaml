@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - base
+    paths:
+      - "js_ts/train/**"
 
 jobs:
   build-and-deploy:
