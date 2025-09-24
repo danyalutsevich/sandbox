@@ -6,7 +6,7 @@ import { KafkaService } from './kafka.service';
 export class KafkaController {
   constructor(private readonly kafkaService: KafkaService) {}
 
-  @MessagePattern('test-topic.reply')
+  @MessagePattern('test-topic')
   handleMessage(@Payload() message: any) {
     console.log('Received message:', message.value);
   }

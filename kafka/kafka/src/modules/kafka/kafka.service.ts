@@ -11,7 +11,7 @@ export class KafkaService {
 
   async onModuleInit() {
     // Subscribe to the topic
-    this.kafkaClient.subscribeToResponseOf('test-topic.reply');
+    this.kafkaClient.subscribeToResponseOf('test-topic');
     this.producer = await this.kafkaClient.connect();
     console.log('Kafka producer connected:', this.producer);
   }

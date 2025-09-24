@@ -11,7 +11,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.KAFKA,
         options: {
           client: {
-            brokers: ['31.97.180.216:9092'], // your Kafka broker(s)
+            brokers: ['kafka.danlutsevych.online:9092'], // your Kafka broker(s)
           },
           consumer: {
             groupId: 'my-consumer-' + Math.random(),
