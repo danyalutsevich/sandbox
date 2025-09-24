@@ -11,10 +11,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.KAFKA,
         options: {
           client: {
-            brokers: ['kafka.danlutsevych.online:9092'], // your Kafka broker(s)
+            brokers: ['31.97.180.216:9092'], // your Kafka broker(s)
           },
           consumer: {
-            groupId: 'my-consumer-' + Math.random(), // unique consumer group
+            groupId: 'my-consumer-' + Math.random(),
           },
         },
       },
@@ -24,4 +24,4 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   providers: [KafkaService],
   exports: [KafkaService],
 })
-export class KafkaModule { }
+export class KafkaModule {}
