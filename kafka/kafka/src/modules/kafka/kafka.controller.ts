@@ -1,10 +1,14 @@
 import { Controller, Post, Query } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { KafkaService } from './kafka.service';
+import { KafkaProducerService } from './kafkaProducer.service';
 
-@Controller('kafka')
+@Controller()
 export class KafkaController {
-  constructor(private readonly kafkaService: KafkaService) {}
+  constructor(
+    private readonly kafkaProducerService: KafkaProducerService,
+    private readonly kafkaService: KafkaService,
+  ) {}
 
   @MessagePattern('test-topic')
   handleMessage(@Payload() message: any) {
@@ -14,5 +18,6 @@ export class KafkaController {
   @Post('produce')
   produceMessage(@Query('message') message: string) {
     this.kafkaService.sendMessage(message);
+    return this.kafkaProducerService.emitUserRegisteredEvent({ message });
   }
 }
