@@ -17,7 +17,20 @@ async function bootstrap() {
   //   },
   // });
   //
-  // await app.startAllMicroservices();
+  //
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.RMQ,
+    options: {
+      urls: ['amqp://user:password@danlutsevych.online:5672'], // match docker-compose user/pass
+      queue: 'my_queue_v2', // your queue name
+      queueOptions: {
+        durable: true,
+      },
+    },
+  });
+
+  await app.startAllMicroservices();
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

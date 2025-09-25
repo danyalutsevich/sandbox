@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { KafkaModule } from './modules/kafka/kafka.module';
+import { RabbitmqModule } from './modules/rabbitmq/rabbitmq.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { KafkaModule } from './modules/kafka/kafka.module';
     //     },
     //   },
     // ]),
-    KafkaModule,
+    // KafkaModule,
+    RabbitmqModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

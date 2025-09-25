@@ -1,0 +1,16 @@
+services:
+  openvpn-as:
+    image: openvpn/openvpn-as
+    container_name: openvpn-as
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - MKNOD
+    devices:
+      - /dev/net/tun
+    ports:
+      - "943:943" # Admin UI / Client UI
+      - "443:443" # OpenVPN over HTTPS
+      - "1194:1194/udp" # OpenVPN UDP
+    volumes:
+      - ./openvpn-data:/openvpn
