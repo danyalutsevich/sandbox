@@ -3,6 +3,12 @@ services:
     image: openvpn/openvpn-as
     container_name: openvpn-as
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.openvpn.rule=Host(`openvpn.danlutsevych.online`)"
+      - "traefik.http.routers.openvpn.entrypoints=websecure"
+      - "traefik.http.routers.openvpn.tls=true"
+      - "traefik.http.routers.openvpn.tls.certresolver=myresolver"
     cap_add:
       - NET_ADMIN
       - MKNOD
