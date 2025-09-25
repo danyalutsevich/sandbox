@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - base
-  paths:
-    - "vpn/**"
-    - ".github/workflows/vpn.yaml"
+    paths:
+      - "vpn/**"
+      - ".github/workflows/vpn.yaml"
 
 jobs:
   build-and-deploy:
