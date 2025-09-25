@@ -9,6 +9,7 @@ services:
       - "traefik.http.routers.openvpn.entrypoints=websecure"
       - "traefik.http.routers.openvpn.tls=true"
       - "traefik.http.routers.openvpn.tls.certresolver=myresolver"
+      - "traefik.http.services.openvpn.loadbalancer.server.port=943"
     cap_add:
       - NET_ADMIN
       - MKNOD
