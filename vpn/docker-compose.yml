@@ -20,4 +20,4 @@ services:
       - "3443:443" # OpenVPN over HTTPS
       - "1194:1194/udp" # OpenVPN UDP
     volumes:
-      - ./openvpn-data:/openvpn
+      - openvpn-data:/openvpn
