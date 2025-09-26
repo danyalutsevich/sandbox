@@ -21,3 +21,7 @@ services:
       - "1194:1194/udp" # OpenVPN UDP
     volumes:
       - openvpn-data:/openvpn
+
+volumes:
+  openvpn-data:
+    driver: local
