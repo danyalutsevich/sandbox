@@ -3,6 +3,7 @@ services:
     image: openvpn/openvpn-as
     container_name: openvpn-as
     restart: unless-stopped
+    # network_mode: "host"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.openvpn.rule=Host(`openvpn.danlutsevych.online`)"
