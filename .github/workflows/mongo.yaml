@@ -14,6 +14,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Save mongo environment file
+        run: echo "${{ vars.MONGO_ENV }}" > mongo/.env
+
       - name: Remove all <none> images and dangling images
         run: docker image prune -f
 

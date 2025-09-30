@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - base
-
+    paths:
+      - "kafka/**"
 jobs:
   build-and-deploy:
     runs-on: self-hosted
