@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - .env
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8282:8080

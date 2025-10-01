@@ -1,0 +1,25 @@
+name: Postgres
+
+on:
+  push:
+    branches:
+      - base
+    paths:
+      - "postgres/**"
+
+jobs:
+  mongo:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Save postgres environment file
+        run: echo "${{ vars.POSTGRES_ENV }}" > postgres/.env
+
+      - name: Remove all <none> images and dangling images
+        run: docker image prune -f
+
+      - name: Docker Compose up
+        run: docker compose up -d --build
+        working-directory: ./postgres
