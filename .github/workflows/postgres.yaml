@@ -8,7 +8,7 @@ on:
       - "postgres/**"
 
 jobs:
-  mongo:
+  postgres:
     runs-on: self-hosted
     steps:
       - name: Checkout code

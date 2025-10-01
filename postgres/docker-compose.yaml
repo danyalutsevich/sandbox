@@ -4,9 +4,15 @@ services:
     restart: always
     env_file:
       - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8282:8080
+
+volumes:
+  pgdata:
+    driver: local
