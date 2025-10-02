@@ -1,81 +1,24 @@
-# services:
-#   kafka:
-#     image: bitnami/kafka:latest
-#     container_name: kafka
-#     ports:
-#       - "9092:9092"
-#     labels:
-#       - "traefik.enable=true"
-#       - "traefik.http.routers.kafka.rule=Host(`kafka.danlutsevych.online`)"
-#       - "traefik.http.routers.kafka.entrypoints=websecure"
-#       - "traefik.http.routers.kafka.tls=true"
-#       - "traefik.http.routers.kafka.tls.certresolver=myresolver"
-#     environment:
-#       - KAFKA_CFG_NODE_ID=0
-#       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-#       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-#       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://31.97.180.216:9092
-#       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-#       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@localhost:9093
-#       - ALLOW_PLAINTEXT_LISTENER=yes
-#     volumes:
-#       - kafka_data:/bitnami/kafka
-#
-# volumes:
-#   kafka_data:
-#     driver: local
-
+version: "3.8"
 services:
-  zookeeper:
-    image: bitnami/zookeeper:latest
-    container_name: zookeeper
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.zookeeper.rule=Host(`zookeeper.danlutsevych.online`)"
-      - "traefik.http.routers.zookeeper.entrypoints=websecure"
-      - "traefik.http.routers.zookeeper.tls=true"
-      - "traefik.http.routers.zookeeper.tls.certresolver=myresolver"
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    ports:
-      - "2181:2181"
-
   kafka:
     image: bitnami/kafka:latest
     container_name: kafka
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.kafka.rule=Host(`kafka.danlutsevych.online`)"
-      - "traefik.http.routers.kafka.entrypoints=websecure"
-      - "traefik.http.routers.kafka.tls=true"
-      - "traefik.http.routers.kafka.tls.certresolver=myresolver"
     ports:
-      - "9092:9092"
+      - "9092:9092" # external
+      - "9093:9093" # internal (optional)
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka.danlutsevych.online:9092
-      - ALLOW_PLAINTEXT_LISTENER=yes
+      # basic config
+      - KAFKA_ENABLE_KRAFT=yes
       - KAFKA_CFG_PROCESS_ROLES=broker,controller
       - KAFKA_CFG_NODE_ID=1
-      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://<YOUR_VPS_IP>:9092
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-    depends_on:
-      - zookeeper
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672" # AMQP port
-      - "15672:15672" # Management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS: password
+      - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
-      - rabbitmq-data:/var/lib/rabbitmq
+      - kafka_data:/bitnami/kafka
 
 volumes:
-  rabbitmq-data:
+  kafka_data:
