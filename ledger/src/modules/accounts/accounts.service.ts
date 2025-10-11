@@ -22,7 +22,6 @@ export class AccountsService {
 
   create(account: CreateAccountDto, user: any) {
     const acc = this.accountsRepo.create({
-      balance: String(account.initialBalance),
       user: { id: user.userId } as any,
     });
     return this.accountsRepo.save(acc);

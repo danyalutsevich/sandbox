@@ -9,7 +9,7 @@ import {
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class GetBalanceUseCase {
+export class GetAccountWithBalanceUseCase {
   constructor(
     @InjectRepository(AccountEntity)
     private readonly accountsRepo: Repository<AccountEntity>,
@@ -21,7 +21,12 @@ export class GetBalanceUseCase {
     private readonly accountBalanceViewRepo: Repository<AccountBalanceView>,
   ) {}
 
-  execute() {
-    return this.accountBalanceViewRepo.find();
+  async execute(accountId: number) {
+    const account = await this.accountsRepo.findOne({
+      where: { id: accountId },
+      relations: ['balance'],
+    });
+
+    return account;
   }
 }

@@ -21,7 +21,7 @@ import { ExchangeRateModule } from './modules/exchange-rate/exchange-rate.module
       type: 'postgres',
       url: process.env.DB_URL,
       entities: Object.values(Entities),
-      logging: false,
+      logging: true,
     }),
     GlobalModule,
     UserModule,
