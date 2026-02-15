@@ -1,0 +1,4 @@
+  @Column({ type: 'bigint', unique: true })
+  @Generated('increment')
+  @Transform(({ value }) => value?.toString())
+  accountNumber: string;
